@@ -13,13 +13,9 @@ var lijinyanzal = function(){
     })
     return ary
   }
-  
-  function compact(ary) {
 
-  }
 
   return {
     chunk: chunk,
-    compact: compact,
   }
 }()
