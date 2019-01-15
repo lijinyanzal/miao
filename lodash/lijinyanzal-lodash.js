@@ -62,6 +62,9 @@ var lijinyanzal = function(){
   }
   
   function dropRight(ary, n = 1) {
+    if (n >= ary.length) {
+      return []
+    }
     return ary.slice(0, ary.length - n)
   }
   
@@ -70,6 +73,10 @@ var lijinyanzal = function(){
       ary[i] = value
     }
     return ary 
+  }
+  
+  function flatten(array) {
+    
   }
   
   
