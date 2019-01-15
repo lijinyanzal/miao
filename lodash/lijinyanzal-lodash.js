@@ -39,14 +39,39 @@ var lijinyanzal = function(){
     }, [])
   }
   
-  function differenceBy(ary, value, iter = identity) {
-   
-    }  
+  function differenceBy(ary, value, iteratee = identity) {
+    let newArg = value.reduce((res,item) => {
+      if (!Array.isArray(item)) {
+        res.push(item)
+      } else {
+        item.forEach(item => res.push(item))
+      }
+      return res.map(item => iteratee(item))
+    }, [])
+
+     return ary.reduce((res, item) => {
+       if(!newArg.includes(iteratee(item))) {
+         res.push(item)
+       }
+       return res
+     }, [])
+    } 
+ 
+  function drop(ary, n = 1) {
+    return ary.slice(n)
+  }
+  
+  
+  
   
   
   return {
     chunk,
     compact,
     difference,
+    differenceBy,
+    drop,
+    
+
   }
 }()
