@@ -75,9 +75,24 @@ var lijinyanzal = function(){
     return ary 
   }
   
-  function flatten(array) {
-    
+  function head(ary) {
+    return ary ? ary[0] : undefined
   }
+  
+  function indexOf(array, value, fromIndex = 0 ) {
+    for (let i = fromIndex; i < array.length; i++){
+      if (array[i] == value) {
+        return i
+      }
+    }
+    return -1 
+  }
+ 
+  function initial(array) {
+    return array.slice(0, array.length - 1)
+  }
+  
+  
   
   
   
@@ -89,6 +104,9 @@ var lijinyanzal = function(){
     drop,
     dropRight,
     fill,
+    head,
+    indexOf,
+    initial,
     
 
   }
