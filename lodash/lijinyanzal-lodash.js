@@ -36,8 +36,7 @@ var lijinyanzal = function(){
       return res
     }, []) 
   }
-  
-  
+
   
   return {
     chunk,
