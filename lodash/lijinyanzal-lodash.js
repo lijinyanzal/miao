@@ -23,20 +23,26 @@ var lijinyanzal = function(){
   }
   
   function difference(ary, ...args) {
-    let result = []
-    args.forEach(item => {
-      args.length == 1 ? result.push(item) : result.push(...item)
-      return result
-      
-    })
-    return ary.reduce((res, item) => {
-      if(!result.includes(item) ) {
+    let newArg = args.reduce((res,item) => {
+      if (!Array.isArray(item)) {
         res.push(item)
+      } else {
+        item.forEach(item => res.push(item))
       }
       return res
-    }, []) 
+    }, [])
+    return ary.reduce((result, item) => {
+      if (!newArg.includes(item)) {
+        result.push(item)
+      }
+      return result
+    }, [])
   }
-
+  
+  function differenceBy(ary, value, iter = identity) {
+   
+    }  
+  
   
   return {
     chunk,
