@@ -38,8 +38,10 @@ var lijinyanzal = function(){
   }
   
   
+  
   return {
     chunk,
     compact,
+    difference,
   }
 }()
