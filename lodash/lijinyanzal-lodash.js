@@ -61,7 +61,16 @@ var lijinyanzal = function(){
     return ary.slice(n)
   }
   
+  function dropRight(ary, n = 1) {
+    return ary.slice(0, ary.length - n)
+  }
   
+  function fill(ary, value, start = 0, end = ary.length) {
+    for (let i = start; i < end; i++) {
+      ary[i] = value
+    }
+    return ary 
+  }
   
   
   
@@ -71,6 +80,8 @@ var lijinyanzal = function(){
     difference,
     differenceBy,
     drop,
+    dropRight,
+    fill,
     
 
   }
