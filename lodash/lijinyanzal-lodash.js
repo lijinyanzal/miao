@@ -155,12 +155,35 @@ function slice(array, start = 0, end = array.length) {
   return result
 }
 
+function sortedIndex(array, value) {
+  let mid = array.length / 2 | 0
+  for (let i = 0; i < array.length; i++) {
+    if (array[mid] < value && array[mid + 1] >= value) {
+      return mid + 1
+    } else if (array[mid] >= value && array[mid - 1] < value ) {
+      return mid
+    } 
+    if (array[mid] < value) {
+      sortedIndex(array.slice(mid), value)
+    } else if (array[mid] > value) {
+      sortedIndex(array.slice(0, mid), value)
+    }
+  }
+}
 
-
-
-
-
-
+function sortedIndexOf(array, value) {
+  let mid = array.length / 2 | 0
+  for (let i = 0; i < array.length; i++) {
+    if (value <= array[mid]  && (value > array[mid - 1] || !array[mid - 1])) {
+      return mid
+    } else if (value > array[mid]) {
+      return sortedIndexOf(array.slice(mid), value)
+    } else if (value <= array[mid]) {
+      return sortedIndexOf(array.slice(0, mid), value)
+    }
+  }
+  return -1
+}
   
 return {
   chunk,
@@ -181,8 +204,8 @@ return {
   pull,
   pullAll,
   reverse,
-  slice,
-  
+  sortedIndex,
+  sortedIndexOf,
   
   
 
