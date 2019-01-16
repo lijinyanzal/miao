@@ -182,8 +182,29 @@ function sortedIndexOf(array, value) {
   return -1
 }
 
+function sortedUniq(array) {
+   return array.reduce((result, item, index) => {
+     if (array.indexOf(item, index + 1) == -1) {
+       result.push(item)
+     }
+     return result
+   }, [])
+}
 
+function tail(array) {
+  return array.slice(1)
+}
 
+function take(array, n = 1) {
+  return array.slice(0, n)
+}
+
+function takeRight(array, n = 1) {
+  if (n > array.length) {
+    return array
+  }
+  return array.slice(array.length - n)
+}
 
 
   
@@ -207,7 +228,10 @@ return {
   reverse,
   sortedIndex,
   sortedIndexOf,
-
+  sortedUniq,
+  tail,
+  take,
+  takeRight,
   
   
 
