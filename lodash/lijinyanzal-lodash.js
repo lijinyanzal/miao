@@ -157,47 +157,45 @@ function slice(array, start = 0, end = array.length) {
 
 function sortedIndex(array, value) {
   let mid = array.length / 2 | 0
-  for (let i = 0; i < array.length; i++) {
-    if (array[mid] < value && array[mid + 1] >= value) {
-      return mid + 1
-    } else if (array[mid] >= value && array[mid - 1] < value ) {
-      return mid
-    } 
-    if (array[mid] < value) {
-      sortedIndex(array.slice(mid), value)
-    } else if (array[mid] > value) {
-      sortedIndex(array.slice(0, mid), value)
-    }
+  if (array[mid] < value && (array[mid + 1] >= value || !array[mid + 1])) {
+    return mid + 1
+  } else if (array[mid] >= value && (array[mid - 1] < value || !array[mid - 1])) {
+    return mid
+  } 
+  if (array[mid] < value) {
+    return sortedIndex(array.slice(mid), value)
+  } else if (array[mid] >= value) {
+    return sortedIndex(array.slice(0, mid), value)
   }
+
 }
 
 function sortedIndexOf(array, value) {
   let mid = array.length / 2 | 0
-  for (let i = 0; i < array.length; i++) {
-    if (value <= array[mid]  && (value > array[mid - 1] || !array[mid - 1])) {
-      return mid
-    } else if (value > array[mid]) {
-      return sortedIndexOf(array.slice(mid), value)
-    } else if (value <= array[mid]) {
-      return sortedIndexOf(array.slice(0, mid), value)
-    }
+  if (value <= array[mid]  && (value > array[mid - 1] || !array[mid - 1])) {
+    return mid
+  } else if (value > array[mid]) {
+    return sortedIndexOf(array.slice(mid), value)
+  } else if (value <= array[mid]) {
+    return sortedIndexOf(array.slice(0, mid), value)
   }
   return -1
 }
 
 function sortedLastIndex(array, value) {
   let mid = array.length / 2 | 0
-  for (let i = 0; i < array.length; i++) {
-    if (value >= array[mid]  && (value < array[mid + 1] || !array[mid + 1])) {
-      return mid
-    } else if (array[mid] >  value) {
-      return sortedLastIndex(array.slice(0, mid), value)
-    } else if (array[mid] <= value) {
-      return sortedLastIndex(array.slice(mid), value)
-    }
+  if (array[mid] <= value && (array[mid + 1] > value || !array[mid + 1])) {
+    return mid + 1
+  } else if (array[mid] > value && (array[mid - 1] <= value || !array[mid - 1])){
+    return mid
+  }
+  if (array[mid] <= value) {
+    return sortedLastIndex(array.slice(mid), value)
+  } else if (array[mid] > value) {
+    return sortedLastIndex(array.slice(0, mid), value)
   }
   return -1
-}
+} 
 
 
 
@@ -207,7 +205,6 @@ return {
   chunk,
   compact,
   difference,
-  differenceBy,
   drop,
   dropRight,
   fill,
@@ -224,6 +221,7 @@ return {
   reverse,
   sortedIndex,
   sortedIndexOf,
+  sortedLastIndex,
   
   
 
