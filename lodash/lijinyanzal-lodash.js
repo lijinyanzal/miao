@@ -182,20 +182,6 @@ function sortedIndexOf(array, value) {
   return -1
 }
 
-function sortedLastIndex(array, value) {
-  let mid = array.length / 2 | 0
-  if (array[mid] <= value && (array[mid + 1] > value || !array[mid + 1])) {
-    return mid + 1
-  } else if (array[mid] > value && (array[mid - 1] <= value || !array[mid - 1])){
-    return mid
-  }
-  if (array[mid] <= value) {
-    return sortedLastIndex(array.slice(mid), value)
-  } else if (array[mid] > value) {
-    return sortedLastIndex(array.slice(0, mid), value)
-  }
-  return -1
-} 
 
 
 
@@ -221,7 +207,7 @@ return {
   reverse,
   sortedIndex,
   sortedIndexOf,
-  sortedLastIndex,
+
   
   
 
