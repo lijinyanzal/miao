@@ -184,6 +184,24 @@ function sortedIndexOf(array, value) {
   }
   return -1
 }
+
+function sortedLastIndex(array, value) {
+  let mid = array.length / 2 | 0
+  for (let i = 0; i < array.length; i++) {
+    if (value >= array[mid]  && (value < array[mid + 1] || !array[mid + 1])) {
+      return mid
+    } else if (array[mid] >  value) {
+      return sortedLastIndex(array.slice(0, mid), value)
+    } else if (array[mid] <= value) {
+      return sortedLastIndex(array.slice(mid), value)
+    }
+  }
+  return -1
+}
+
+
+
+
   
 return {
   chunk,
