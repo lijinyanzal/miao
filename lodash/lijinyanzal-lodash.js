@@ -101,7 +101,7 @@ function intersection(ary) {
 
 function join(ary, sep = ",") {
    return ary.reduce((result, item, index) => {
-    index != ary.length - 1 ? result += item + sep : result += item 
+    index != ary.length - 1 ? result += String(item) + sep : result += String(item) 
     return result
    },"")
 }
@@ -140,6 +140,26 @@ function pullAll(array, values) {
   return array.filter(item => !values.includes(item))
 }
 
+function reverse (array) {
+  return array.reduce((result, item) => {
+    result.unshift(item)
+    return result
+  }, [])
+}
+
+function slice(array, start = 0, end = array.length) {
+  let result = []
+  for (let i = start; i < end; i++) {
+    result.push(array[i])
+  }
+  return result
+}
+
+
+
+
+
+
 
   
 return {
@@ -160,6 +180,8 @@ return {
   nth,
   pull,
   pullAll,
+  reverse,
+  slice,
   
   
   
