@@ -250,45 +250,45 @@ function identity(value) {
   return value
 }
 
-function sumBy(ary, iteratee) {
-  return ary.reduce((res, item) => {
-    res += lijinyanzal.iteratee(item)
-    return res
-  }, 0)
-}
+// function sumBy(ary, iteratee) {
+//   return ary.reduce((res, item) => {
+//     res += lijinyanzal.iteratee(item)
+//     return res
+//   }, 0)
+// }
 
 function sum(ary) {
   return sumBy(ary,identity)
 }
   
 
-function differenceBy(ary, values, iteratee) {
-  let newVal = values.reduce((res, item) => {
-    res.push(item)
-    return res
-  }, []).map(item => lijinyanzal.iteratee(item))
-  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(val.inclueds(iteratee(item))))
-} 
+// function differenceBy(ary, values, iteratee) {
+//   let newVal = values.reduce((res, item) => {
+//     res.push(item)
+//     return res
+//   }, []).map(item => lijinyanzal.iteratee(item))
+//   return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(val.inclueds(iteratee(item))))
+// } 
   
-function iteratee(func) {
+// function iteratee(func) {
   
-}  
+// }  
 
-function matches(source) {
-  return function (obj) {
-    for (let key in source) {
-      if(obj[key] !== source[key]) {
-        if ()
-      }
-    }
-    return true
-  }
-}
+// function matches(source) {
+//   return function (obj) {
+//     for (let key in source) {
+//       if(obj[key] !== source[key]) {
+//         if ()
+//       }
+//     }
+//     return true
+//   }
+// }
 
-function matchesProperty() {
+// function matchesProperty() {
   
   
-}
+// }
 
 function fromPairs(ary) {
   let pairs = []
@@ -313,12 +313,12 @@ function toPairs(obj) {
 }
 
 
-function isMatch(obj, src) {
-  for (let key in src) {
+// function isMatch(obj, src) {
+//   for (let key in src) {
     
-  }
-  return true
-}
+//   }
+//   return true
+// }
 
 
 return {
