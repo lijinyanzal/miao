@@ -258,7 +258,7 @@ function sumBy(ary, iteratee) {
 }
 
 function sum(ary) {
-  return sumBy(ary,identity)
+  return sumBy(ary, it => it)
 }
   
 
@@ -267,7 +267,7 @@ function differenceBy(ary, values, iteratee) {
     res.push(item)
     return res
   }, []).map(item => lijinyanzal.iteratee(item))
-  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(val.inclueds(iteratee(item))))
+  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(newVal.inclueds(iteratee(item))))
 } 
   
 function iteratee(func) {
@@ -284,12 +284,12 @@ function isMatch(obj, src) {
     if (src[key] !== obj[key]) {
       if (!isMatch(src[key], obj[key])) {
         return false
-      } else if (src[key] !== obj[key]) {
-        return false
+      } else {
+        return true 
       }
     }
+    return true 
   }
-  return true
 }
 
 function matches(src) {
@@ -338,8 +338,7 @@ function toPairs(obj) {
   let ary = []
   let item
   for (let key in obj){
-    item = [] 
-    item.push(key, obj[key])
+    item = [key, obj[key]] 
     ary.push(item)
   }
   return ary
@@ -348,6 +347,7 @@ function toPairs(obj) {
 
 // filter
 // find
+// isEqual
 
 return {
   chunk,
