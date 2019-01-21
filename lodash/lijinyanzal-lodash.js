@@ -351,7 +351,6 @@ return {
   property,
   identity,
   sum,
-  sumBy,
   fromPairs,
   toPairs,
 
