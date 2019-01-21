@@ -239,7 +239,24 @@ function flattenDeep(array) {
     return res
   }, [])
 }
-  
+
+function flattenDepth(array, depth = 1) {
+  if (depth <= 0) {
+    return array
+  } else {
+    return array.reduce((res, item) => {
+      if(Array.isArray(item)) {
+        res.push(...flattenDepth(item, depth - 1))
+      } else {
+        res.push(item)
+      }
+      return res
+    }, [])
+  }
+   
+}
+
+
 return {
   chunk,
   compact,
@@ -266,7 +283,7 @@ return {
   takeRight,
   flatten,
   flattenDeep,
-  
+  flattenDepth,
   
 
 }
