@@ -39,23 +39,6 @@ function difference(ary, ...args) {
   }, [])
 }
 
-function differenceBy(ary, value, iteratee = identity) {
-  let newArg = value.reduce((res,item) => {
-    if (!Array.isArray(item)) {
-      res.push(item)
-    } else {
-      item.forEach(item => res.push(item))
-    }
-    return res.map(item => iteratee(item))
-  }, [])
-
-    return ary.reduce((res, item) => {
-      if(!newArg.includes(iteratee(item))) {
-        res.push(item)
-      }
-      return res
-    }, [])
-  } 
 
 function drop(ary, n = 1) {
   return ary.slice(n)
@@ -256,6 +239,54 @@ function flattenDepth(array, depth = 1) {
    
 }
 
+function property(propName) {
+  return function (obj) {
+    return obj[propName]
+  }
+}
+
+function differenceBy(ary, value, iteratee = identity) {
+  let newArg = value.reduce((res,item) => {
+    if (!Array.isArray(item)) {
+      res.push(item)
+    } else {
+      item.forEach(item => res.push(item))
+    }
+    return res.map(item => iteratee(item))
+  }, [])
+
+    return ary.reduce((res, item) => {
+      if(!newArg.includes(iteratee(item))) {
+        res.push(item)
+      }
+      return res
+    }, [])
+  } 
+
+  function identity(value) {
+    return value
+  }
+  
+  function sumBy(ary, iteratee) {
+    return ary.reduce((res, item) => {
+      res += iteratee(item)
+      return res
+    }, 0)
+  }
+  
+  function sum(ary) {
+    return sumBy(ary,identity)
+  }
+  
+  
+  
+  
+  
+  function iteratee(func = identity) {
+    
+  }
+  
+
 
 return {
   chunk,
@@ -284,7 +315,10 @@ return {
   flatten,
   flattenDeep,
   flattenDepth,
-  
+  property,
+  identity,
+  sum,
+  sumBy,
 
 }
 }()
