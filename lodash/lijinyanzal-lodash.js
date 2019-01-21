@@ -245,47 +245,71 @@ function property(propName) {
   }
 }
 
-function differenceBy(ary, value, iteratee = identity) {
-  let newArg = value.reduce((res,item) => {
-    if (!Array.isArray(item)) {
-      res.push(item)
-    } else {
-      item.forEach(item => res.push(item))
-    }
-    return res.map(item => iteratee(item))
-  }, [])
 
-    return ary.reduce((res, item) => {
-      if(!newArg.includes(iteratee(item))) {
-        res.push(item)
+function identity(value) {
+  return value
+}
+
+function sumBy(ary, iteratee) {
+  return ary.reduce((res, item) => {
+    res += lijinyanzal.iteratee(item)
+    return res
+  }, 0)
+}
+
+function sum(ary) {
+  return sumBy(ary,identity)
+}
+  
+
+function differenceBy(ary, values, iteratee) {
+  let newVal = values.reduce((res, item) => {
+    res.push(item)
+    return res
+  }, []).map(item => lijinyanzal.iteratee(item))
+  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(val.inclueds(iteratee(item))))
+} 
+  
+function iteratee(func) {
+  
+}  
+
+function matches(source) {
+  return function (obj) {
+    for (let key in source) {
+      if(obj[key] !== source[key]) {
+        if ()
       }
-      return res
-    }, [])
-  } 
+    }
+    return true
+  }
+}
 
-  function identity(value) {
-    return value
-  }
-  
-  function sumBy(ary, iteratee) {
-    return ary.reduce((res, item) => {
-      res += iteratee(item)
-      return res
-    }, 0)
-  }
-  
-  function sum(ary) {
-    return sumBy(ary,identity)
-  }
+function matchesProperty() {
   
   
+}
+
+function fromPairs(ary) {
+  let pairs = []
+  pairs.push(...lijinyanzal.flattenDeep(ary))
+  return pairs.reduce((obj, item, index, ary) => {
+    if (index % 2 == 0) {
+      obj[item] = ary[index + 1]
+    }
+    return obj
+  }, {})
+}
+
+
+function toPairs(obj) {
   
+}
+
+
+function isMatch() {
   
-  
-  function iteratee(func = identity) {
-    
-  }
-  
+}
 
 
 return {
@@ -319,6 +343,7 @@ return {
   identity,
   sum,
   sumBy,
+  fromPairs
 
 }
 }()
