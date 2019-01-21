@@ -250,45 +250,78 @@ function identity(value) {
   return value
 }
 
-// function sumBy(ary, iteratee) {
-//   return ary.reduce((res, item) => {
-//     res += lijinyanzal.iteratee(item)
-//     return res
-//   }, 0)
-// }
+function sumBy(ary, iteratee) {
+  return ary.reduce((res, item) => {
+    res += lijinyanzal.iteratee(item)
+    return res
+  }, 0)
+}
 
 function sum(ary) {
   return sumBy(ary,identity)
 }
   
 
-// function differenceBy(ary, values, iteratee) {
-//   let newVal = values.reduce((res, item) => {
-//     res.push(item)
-//     return res
-//   }, []).map(item => lijinyanzal.iteratee(item))
-//   return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(val.inclueds(iteratee(item))))
-// } 
+function differenceBy(ary, values, iteratee) {
+  let newVal = values.reduce((res, item) => {
+    res.push(item)
+    return res
+  }, []).map(item => lijinyanzal.iteratee(item))
+  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(val.inclueds(iteratee(item))))
+} 
   
-// function iteratee(func) {
-  
-// }  
+function iteratee(func) {
+  return function (obj, src) {
+    if (Array.isArray(func) || Object.prototype.toString.call(func) == "[object Object]" ) {
+      return lijinyanzal.isMatch(obj, func)
+    } else if (Object.prototype.toString.call(func) == "[object Function]" ) {
+      return lijinyanzal.isMatch(obj, func(src))
+    }
+  } 
+}  
+function isMatch(obj, src) {
+  for (let key in src) {
+    if (src[key] !== obj[key]) {
+      if (!isMatch(src[key], obj[key])) {
+        return false
+      } else if (src[key] !== obj[key]) {
+        return false
+      }
+    }
+  }
+  return true
+}
 
-// function matches(source) {
-//   return function (obj) {
-//     for (let key in source) {
-//       if(obj[key] !== source[key]) {
-//         if ()
-//       }
-//     }
-//     return true
-//   }
-// }
+function matches(src) {
+  return function (obj) {
+    for (let key in src) {
+      if (src[key] !== obj[key]) {
+        if (!lijinyanzal.isMatch(src[key], obj[key])) {
+          return false
+        } else if (src[key] !== obj[key]) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+}
 
-// function matchesProperty() {
+function matchesProperty(obj, src) {
+  return function (obj) {
+    for (let key in src) {
+      if (src[key] !== obj[key]) {
+        if (!lijinyanzal.isMatch(src[key], obj[key])) {
+          return false
+        } else if (src[key] !== obj[key]) {
+          return false
+        }
+      }
+    }
+    return true
+  }
   
-  
-// }
+}
 
 function fromPairs(ary) {
   let pairs = []
@@ -313,13 +346,8 @@ function toPairs(obj) {
 }
 
 
-// function isMatch(obj, src) {
-//   for (let key in src) {
-    
-//   }
-//   return true
-// }
-
+// filter
+// find
 
 return {
   chunk,
@@ -351,8 +379,14 @@ return {
   property,
   identity,
   sum,
+  sumBy,
   fromPairs,
   toPairs,
+  isMatch,
+  matches,
+  differenceBy,
+  matchesProperty,
+  iteratee,
 
 }
 }()
