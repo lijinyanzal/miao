@@ -301,9 +301,15 @@ function fromPairs(ary) {
   }, {})
 }
 
-
 function toPairs(obj) {
-  
+  let ary = []
+  let item = []
+  for (let key in obj){
+    item.push(key, obj[key])
+    ary.push(item)
+    item = []
+  }
+  return ary
 }
 
 
@@ -343,7 +349,8 @@ return {
   identity,
   sum,
   sumBy,
-  fromPairs
+  fromPairs,
+  toPairs,
 
 }
 }()
