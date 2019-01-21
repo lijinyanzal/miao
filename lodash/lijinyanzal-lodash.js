@@ -212,16 +212,33 @@ function uniq(array) {
 
 function flatten(array) {
   return array.reduce((res, item) => {
-    if (!Array.isArray(item)) {
-      res.push(item)
+    if (Array.isArray(item)) {
+      res.push(...item)
     } else {
-      item.forEach(item => res.push(item))
+      res.push(item)
+    }
+    return res
+  }, []) 
+} 
+
+function flattenDeep(array) {
+  return array.reduce((res, item) => {
+    if (Array.isArray(item)) {
+      item = item.reduce((result, item) =>  {
+        if (Array.isArray(item) && item) {
+          flattenDeep(item).forEach(item =>result.push(item))
+        } else {
+          result.push(item)
+        }
+        return result
+      }, [])
+      res.push(...item)
+    } else {
+      res.push(item)
     }
     return res
   }, [])
-  
-} 
-
+}
   
 return {
   chunk,
@@ -248,6 +265,7 @@ return {
   take,
   takeRight,
   flatten,
+  flattenDeep,
   
   
 
