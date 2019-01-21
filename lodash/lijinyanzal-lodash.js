@@ -313,8 +313,11 @@ function toPairs(obj) {
 }
 
 
-function isMatch() {
-  
+function isMatch(obj, src) {
+  for (let key in src) {
+    
+  }
+  return true
 }
 
 
