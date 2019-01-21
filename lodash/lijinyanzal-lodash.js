@@ -303,11 +303,11 @@ function fromPairs(ary) {
 
 function toPairs(obj) {
   let ary = []
-  let item = []
+  let item
   for (let key in obj){
+    item = [] 
     item.push(key, obj[key])
     ary.push(item)
-    item = []
   }
   return ary
 }
