@@ -212,14 +212,13 @@ function uniq(array) {
 
 function flatten(array) {
   return array.reduce((res, item) => {
-    if (Array.isArray(item)) {
-      item => item.forEach(res.push(item))
-    } else {
+    if (!Array.isArray(item)) {
       res.push(item)
+    } else {
+      item.forEach(item => res.push(item))
     }
     return res
   }, [])
-  
   
 } 
 
