@@ -206,6 +206,22 @@ function takeRight(array, n = 1) {
   return array.slice(array.length - n)
 }
 
+function uniq(array) {
+  array
+}
+
+function flatten(array) {
+  return array.reduce((res, item) => {
+    if (Array.isArray(item)) {
+      item => item.forEach(res.push(item))
+    } else {
+      res.push(item)
+    }
+    return res
+  }, [])
+  
+  
+} 
 
   
 return {
@@ -232,6 +248,7 @@ return {
   tail,
   take,
   takeRight,
+  flatten,
   
   
 
