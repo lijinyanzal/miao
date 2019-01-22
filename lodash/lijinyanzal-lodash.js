@@ -250,12 +250,12 @@ function identity(value) {
   return value
 }
 
-function sumBy(ary, iteratee = identity) {
-  return ary.reduce((res, item) => {
-    res += lijinyanzal.iteratee(item)
-    return res
-  }, 0)
-}
+// function sumBy(ary, iteratee = identity) {
+//   return ary.reduce((res, item) => {
+//     res += lijinyanzal.iteratee(item)
+//     return res
+//   }, 0)
+// }
 
 function sum(ary) {
   return ary.reduce((res, item) => {
@@ -265,13 +265,13 @@ function sum(ary) {
 }
   
 
-function differenceBy(ary, values, iteratee) {
-  let newVal = values.reduce((res, item) => {
-    res.push(item)
-    return res
-  }, []).map(item => lijinyanzal.iteratee(item))
-  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(newVal.inclueds(lijinyanzal.iteratee(item))))
-} 
+// function differenceBy(ary, values, iteratee) {
+//   let newVal = values.reduce((res, item) => {
+//     res.push(item)
+//     return res
+//   }, []).map(item => lijinyanzal.iteratee(item))
+//   return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(newVal.inclueds(lijinyanzal.iteratee(item))))
+// } 
  
 function isMatch(obj, src) {
   for (let key in src) {
@@ -342,28 +342,31 @@ function toPairs(obj) {
 
 
 function isBoolean(value) {
-  if (value === false || value === true) {
-    return true 
-  } else {
-    return false
-  }
+  let toString = Object.prototype.toString
+  return toString.call(value) === '[object Boolean]' ? true :false
 }
 
 // filter
 // find
 // isEqual
 
-function iteratee(func = identity) {
-  if (typeof func === "function") {
-    return func
-  } else if (typeof func === "string") {
-    return lijinyanzal.property(func)
-  } else if (Array.isArray(func)) {
-    return obj => lijinyanzal.matchesProperty(obj, func)
-  } else {
-    return  obj => lijinyanzal.isMatch(obj, func)
-  }
-} 
+// function iteratee(func = lijinyanzal.identity) {
+//   if (typeof func === "function") {
+//     return func
+//   } else if (typeof func === "string") {
+//     return lijinyanzal.property(func)
+//   } else if (Array.isArray(func)) {
+//     return lijinyanzal.matchesProperty(func)
+//   } else if (){
+//     return obj => lijinyanzal.isMatch(obj, func)
+//   }
+// } 
+
+
+
+
+
+
 return {
   chunk,
   compact,
@@ -394,14 +397,11 @@ return {
   property,
   identity,
   sum,
-  sumBy,
   fromPairs,
   toPairs,
   isMatch,
   matches,
-  differenceBy,
   matchesProperty,
-  iteratee,
   isBoolean,
 
 }
