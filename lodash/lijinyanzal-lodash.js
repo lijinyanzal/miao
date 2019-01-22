@@ -409,8 +409,34 @@ function isDate(value) {
   }
 }
 
+function isArrayLikeObject(value) {
+  if (Array.isArray(value) || typeof value === "object") {
+    return true 
+  } else {
+    return false
+  }
+}
 
+function isElement(value){
+  let toString = Object.prototype.toString
+  if (toString.call(value) === "[object HTMLBodyElement]") {
+    return true
+  } else {
+    return false
+  }
+}
 
+function isFinite(value) {
+  if (typeof value !== "number" ) {
+    return false
+  } else {
+    if (value === Infinity || value === -Infinity || Number.isNaN(value)) {
+      return false
+    } else {
+      return true
+    }
+  }
+}
 
 return {
   chunk,
@@ -452,7 +478,9 @@ return {
   isArrayLike,
   isArrayBuffer,
   isArguments,
-  
+  isArrayLikeObject,
+  isElement,
+  isFinite,
 
 }
 }()
