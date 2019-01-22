@@ -252,13 +252,13 @@ function identity(value) {
 
 function sumBy(ary, iteratee) {
   return ary.reduce((res, item) => {
-    res += this.iteratee(item)
+    res += lijinyanzal.iteratee(item)
     return res
   }, 0)
 }
 
 function sum(ary) {
-  return sumBy(ary, this.identity)
+  return sumBy(ary, lijinyanzal.identity)
 }
   
 
