@@ -342,6 +342,9 @@ function toPairs(obj) {
 
 
 function isBoolean(value) {
+  if (!value) {
+    return false
+  }
   if (value.__proto__ === Boolean.prototype) {
     return true
   } else {
@@ -353,7 +356,7 @@ function isBoolean(value) {
 // find
 // isEqual
 
-function iteratee(func = lijinyanzal.identity) {
+function iteratee(func = identity) {
   if (typeof func === "function") {
     return func
   } else if (typeof func === "string") {
