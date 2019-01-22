@@ -258,7 +258,10 @@ function sumBy(ary, iteratee) {
 }
 
 function sum(ary) {
-  return sumBy(ary, lijinyanzal.identity)
+  return ary.reduce((res, item) => {
+    res += item
+    return res
+  }, 0)
 }
   
 
@@ -266,8 +269,8 @@ function differenceBy(ary, values, iteratee) {
   let newVal = values.reduce((res, item) => {
     res.push(item)
     return res
-  }, []).map(item => this.iteratee(item))
-  return ary.map(it => this.iteratee(it)).filter(item => !(newVal.inclueds(iteratee(item))))
+  }, []).map(item => lijinyanzal.iteratee(item))
+  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(newVal.inclueds(lijinyanzal.iteratee(item))))
 } 
  
 function isMatch(obj, src) {
@@ -287,7 +290,7 @@ function matches(src) {
   return function (obj) {
     for (let key in src) {
       if (src[key] !== obj[key]) {
-        if (!this.isMatch(src[key], obj[key])) {
+        if (!lijinyanzal.isMatch(src[key], obj[key])) {
           return false
         } else if (src[key] !== obj[key]) {
           return false
@@ -302,7 +305,7 @@ function matchesProperty(obj, src) {
   return function (obj) {
     for (let key in src) {
       if (src[key] !== obj[key]) {
-        if (!this.isMatch(src[key], obj[key])) {
+        if (!lijinyanzal.isMatch(src[key], obj[key])) {
           return false
         } else if (src[key] !== obj[key]) {
           return false
@@ -316,7 +319,7 @@ function matchesProperty(obj, src) {
 
 function fromPairs(ary) {
   let pairs = []
-  pairs.push(...this.flattenDeep(ary))
+  pairs.push(...lijinyanzal.flattenDeep(ary))
   return pairs.reduce((obj, item, index, ary) => {
     if (index % 2 == 0) {
       obj[item] = ary[index + 1]
@@ -350,15 +353,15 @@ function isBoolean(value) {
 // find
 // isEqual
 
-function iteratee(func = this.identity) {
+function iteratee(func = lijinyanzal.identity) {
   if (typeof func === "function") {
     return func
   } else if (typeof func === "string") {
-    return this.property(func)
+    return lijinyanzal.property(func)
   } else if (Array.isArray(func)) {
-    return this.matchesProperty(func)
+    return lijinyanzal.matchesProperty(func)
   } else {
-    return this.matches(func)
+    return lijinyanzal.matches(func)
   }
 } 
 return {
