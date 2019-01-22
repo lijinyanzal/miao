@@ -359,9 +359,9 @@ function iteratee(func = identity) {
   } else if (typeof func === "string") {
     return lijinyanzal.property(func)
   } else if (Array.isArray(func)) {
-    return lijinyanzal.matchesProperty(...func)
+    return obj => lijinyanzal.matchesProperty(obj, func)
   } else {
-    return  lijinyanzal.isMatch(...func)
+    return  obj => lijinyanzal.isMatch(obj, func)
   }
 } 
 return {
