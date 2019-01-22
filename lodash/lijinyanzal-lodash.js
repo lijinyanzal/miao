@@ -250,7 +250,7 @@ function identity(value) {
   return value
 }
 
-function sumBy(ary, iteratee) {
+function sumBy(ary, iteratee = identity) {
   return ary.reduce((res, item) => {
     res += lijinyanzal.iteratee(item)
     return res
@@ -362,9 +362,9 @@ function iteratee(func = identity) {
   } else if (typeof func === "string") {
     return lijinyanzal.property(func)
   } else if (Array.isArray(func)) {
-    return lijinyanzal.matchesProperty(func)
+    return lijinyanzal.matchesProperty(...func)
   } else {
-    return lijinyanzal.matches(func)
+    return  lijinyanzal.isMatch(...func)
   }
 } 
 return {
