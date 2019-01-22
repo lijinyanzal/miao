@@ -407,6 +407,7 @@ function isDate(value) {
   } else {
     return false
   }
+}
 
 
 
