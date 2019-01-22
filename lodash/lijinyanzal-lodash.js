@@ -361,6 +361,14 @@ function isBoolean(value) {
 //     return obj => lijinyanzal.isMatch(obj, func)
 //   }
 // } 
+function isArguments(value){
+  let toString = Object.prototype.toString
+  if (toString.call(value) === '[object Arguments]') {
+    return true 
+  } else {
+    return false
+  }
+}
 
 function isArray(value){
   let toString = Object.prototype.toString
@@ -371,8 +379,26 @@ function isArray(value){
   }
 }
 
+function isArrayBuffer(value){
+  let toString = Object.prototype.toString
+  if (toString.call(value) === '[object ArrayBuffer]') {
+    return true 
+  } else {
+    return false
+  }
+}
 
-
+function isArrayLike(value) {
+  let toString = Object.prototype.toString
+  if (toString.call(value) === '[object Function]') {
+    return false
+  }
+  if (value.length && value.length >= 0 && value.length <= Number.MAX_SAFE_INTEGER) {
+    return true
+  } else {
+    return false
+  } 
+}
 
 
 return {
@@ -412,6 +438,10 @@ return {
   matchesProperty,
   isBoolean,
   isArray,
+  isArrayLike,
+  isArrayBuffer,
+  isArguments,
+  
 
 }
 }()
