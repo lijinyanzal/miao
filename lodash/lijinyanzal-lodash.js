@@ -252,13 +252,13 @@ function identity(value) {
 
 function sumBy(ary, iteratee) {
   return ary.reduce((res, item) => {
-    res += lijinyanzal.iteratee(item)
+    res += this.iteratee(item)
     return res
   }, 0)
 }
 
 function sum(ary) {
-  return sumBy(ary, it => it)
+  return sumBy(ary, this.identity)
 }
   
 
@@ -266,19 +266,10 @@ function differenceBy(ary, values, iteratee) {
   let newVal = values.reduce((res, item) => {
     res.push(item)
     return res
-  }, []).map(item => lijinyanzal.iteratee(item))
-  return ary.map(it => lijinyanzal.iteratee(it)).filter(item => !(newVal.inclueds(iteratee(item))))
+  }, []).map(item => this.iteratee(item))
+  return ary.map(it => this.iteratee(it)).filter(item => !(newVal.inclueds(iteratee(item))))
 } 
-  
-function iteratee(func) {
-  return function (obj, src) {
-    if (Array.isArray(func) || Object.prototype.toString.call(func) == "[object Object]" ) {
-      return lijinyanzal.isMatch(obj, func)
-    } else if (Object.prototype.toString.call(func) == "[object Function]" ) {
-      return lijinyanzal.isMatch(obj, func(src))
-    }
-  } 
-}  
+ 
 function isMatch(obj, src) {
   for (let key in src) {
     if (src[key] !== obj[key]) {
@@ -296,7 +287,7 @@ function matches(src) {
   return function (obj) {
     for (let key in src) {
       if (src[key] !== obj[key]) {
-        if (!lijinyanzal.isMatch(src[key], obj[key])) {
+        if (!this.isMatch(src[key], obj[key])) {
           return false
         } else if (src[key] !== obj[key]) {
           return false
@@ -311,7 +302,7 @@ function matchesProperty(obj, src) {
   return function (obj) {
     for (let key in src) {
       if (src[key] !== obj[key]) {
-        if (!lijinyanzal.isMatch(src[key], obj[key])) {
+        if (!this.isMatch(src[key], obj[key])) {
           return false
         } else if (src[key] !== obj[key]) {
           return false
@@ -325,7 +316,7 @@ function matchesProperty(obj, src) {
 
 function fromPairs(ary) {
   let pairs = []
-  pairs.push(...lijinyanzal.flattenDeep(ary))
+  pairs.push(...this.flattenDeep(ary))
   return pairs.reduce((obj, item, index, ary) => {
     if (index % 2 == 0) {
       obj[item] = ary[index + 1]
@@ -336,19 +327,40 @@ function fromPairs(ary) {
 
 function toPairs(obj) {
   let ary = []
-  let item
-  for (let key in obj){
-    item = [key, obj[key]] 
-    ary.push(item)
+  
+  let hasOwn = Object.prototype.hasOwnProperty
+  for (let key in obj) {
+    if (hasOwn.call(obj, key)) {
+      ary.push([key, obj[key]])
+    }
   }
   return ary
 }
 
 
+function isBoolean(value) {
+  if (value.__proto__ === Boolean.prototype) {
+    return true
+  } else {
+    return false
+  }
+}
+
 // filter
 // find
 // isEqual
 
+function iteratee(func = this.identity) {
+  if (typeof func === "function") {
+    return func
+  } else if (typeof func === "string") {
+    return this.property(func)
+  } else if (Array.isArray(func)) {
+    return this.matchesProperty(func)
+  } else {
+    return this.matches(func)
+  }
+} 
 return {
   chunk,
   compact,
@@ -387,6 +399,7 @@ return {
   differenceBy,
   matchesProperty,
   iteratee,
+  isBoolean,
 
 }
 }()
