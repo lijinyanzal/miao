@@ -429,7 +429,8 @@ function isMap(value) {
 }
 
 function isNaN(value){
-  return typeof value !== "number" && value === value && value !== null || typeof value === "number" && value !== value
+  let toString = Object.prototype.toString
+  return toString.call(value) === "[object number]" && window.isNaN(value)
 }
 
 function isNil(value) {
@@ -453,6 +454,9 @@ function isObjectLike(value) {
   return typeof value === "object" && value !== null
 }
 
+function isPlainObject(value) {
+  return value.__proto__ === Object.prototype || value.__proto__ == null 
+}
 
 
 return {
@@ -509,6 +513,7 @@ return {
   isNumber,
   isObject,
   isObjectLike,
+  isPlainObject,
   
   
   
