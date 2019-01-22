@@ -428,7 +428,9 @@ function isMap(value) {
   return toString.call(value) === "[object Map]"
 }
 
-
+function isNaN(value){
+  return typeof value !== "number" && value === value || typeof value === "number" && value !== value
+}
 
 return {
   chunk,
@@ -477,6 +479,8 @@ return {
   isInteger,
   isLength,
   isMap,
+  isDate,
+  isNaN,
   
   
 
