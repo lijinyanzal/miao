@@ -362,6 +362,14 @@ function isBoolean(value) {
 //   }
 // } 
 
+function isArray(value){
+  let toString = Object.prototype.toString
+  if (toString.call(value) === '[object Array]') {
+    return true 
+  } else {
+    return false
+  }
+}
 
 
 
@@ -403,6 +411,7 @@ return {
   matches,
   matchesProperty,
   isBoolean,
+  isArray,
 
 }
 }()
