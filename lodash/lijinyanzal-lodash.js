@@ -429,8 +429,20 @@ function isMap(value) {
 }
 
 function isNaN(value){
-  return typeof value !== "number" && value === value || typeof value === "number" && value !== value
+  return (typeof value !== "number" && value === value && value !== null) || (typeof value === "number" && value !== value) 
 }
+
+function isNil(value) {
+  return value === undefined || value === null
+}
+
+function isNull(value){
+  return value === null 
+}
+
+// function isNumber(value){
+  
+// }
 
 return {
   chunk,
@@ -481,6 +493,9 @@ return {
   isMap,
   isDate,
   isNaN,
+  isNil,
+  isNull,
+  
   
   
 
