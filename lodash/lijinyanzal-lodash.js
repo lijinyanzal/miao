@@ -429,7 +429,7 @@ function isMap(value) {
 }
 
 function isNaN(value){
-  return typeof value === "number" && value !== value
+  return typeof value !== "number" && value === value && value !== null || typeof value === "number" && value !== value
 }
 
 function isNil(value) {
@@ -452,6 +452,8 @@ function isObject(value) {
 function isObjectLike(value) {
   return typeof value === "object" && value !== null
 }
+
+
 
 return {
   chunk,
