@@ -342,11 +342,8 @@ function toPairs(obj) {
 
 
 function isBoolean(value) {
-  if (!value) {
-    return false
-  }
-  if (value.__proto__ === Boolean.prototype) {
-    return true
+  if (value === false || value === true) {
+    return true 
   } else {
     return false
   }
