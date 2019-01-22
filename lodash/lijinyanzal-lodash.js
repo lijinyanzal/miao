@@ -313,8 +313,7 @@ function matchesProperty(obj, src) {
       }
     }
     return true
-  }
-  
+  } 
 }
 
 function fromPairs(ary) {
@@ -330,7 +329,6 @@ function fromPairs(ary) {
 
 function toPairs(obj) {
   let ary = []
-  
   let hasOwn = Object.prototype.hasOwnProperty
   for (let key in obj) {
     if (hasOwn.call(obj, key)) {
@@ -343,7 +341,7 @@ function toPairs(obj) {
 
 function isBoolean(value) {
   let toString = Object.prototype.toString
-  return toString.call(value) === '[object Boolean]' ? true :false
+  return toString.call(value) === '[object Boolean]'
 }
 
 // filter
@@ -363,29 +361,17 @@ function isBoolean(value) {
 // } 
 function isArguments(value){
   let toString = Object.prototype.toString
-  if (toString.call(value) === '[object Arguments]') {
-    return true 
-  } else {
-    return false
-  }
+  return toString.call(value) === '[object Arguments]'  
 }
 
 function isArray(value){
   let toString = Object.prototype.toString
-  if (toString.call(value) === '[object Array]') {
-    return true 
-  } else {
-    return false
-  }
+  return toString.call(value) === '[object Array]'   
 }
 
 function isArrayBuffer(value){
   let toString = Object.prototype.toString
-  if (toString.call(value) === '[object ArrayBuffer]') {
-    return true 
-  } else {
-    return false
-  }
+  return toString.call(value) === '[object ArrayBuffer]'
 }
 
 function isArrayLike(value) {
@@ -393,37 +379,22 @@ function isArrayLike(value) {
   if (toString.call(value) === '[object Function]') {
     return false
   }
-  if (value.length && value.length >= 0 && value.length <= Number.MAX_SAFE_INTEGER) {
-    return true
-  } else {
-    return false
-  } 
+  return value.length && value.length >= 0 && value.length <= Number.MAX_SAFE_INTEGER
+ 
 }
 
 function isDate(value) {
   let toString = Object.prototype.toString
-  if (toString.call(value) === "[object Date]") {
-    return true
-  } else {
-    return false
-  }
+  return toString.call(value) === "[object Date]"
 }
 
 function isArrayLikeObject(value) {
-  if (Array.isArray(value) || typeof value === "object") {
-    return true 
-  } else {
-    return false
-  }
+  return Array.isArray(value) || typeof value === "object"
 }
 
 function isElement(value){
   let toString = Object.prototype.toString
-  if (toString.call(value) === "[object HTMLBodyElement]") {
-    return true
-  } else {
-    return false
-  }
+  return toString.call(value) === "[object HTMLBodyElement]"
 }
 
 function isFinite(value) {
@@ -437,6 +408,27 @@ function isFinite(value) {
     }
   }
 }
+
+function isFunction(value) {
+  let toString = Object.prototype.toString
+  return toString.call(value) === "[object Function]"
+  
+}
+
+function isInteger(value){
+  return typeof value === "number" && isFinite(value) && Math.floor(value) === value
+}
+
+function isLength(value){
+  return isInteger(value) && value >= 0 &&　value <= 2**53 - 1  
+}
+
+function isMap(value) {
+  let toString = Object.prototype.toString
+  return toString.call(value) === "[object Map]"
+}
+
+
 
 return {
   chunk,
@@ -481,6 +473,12 @@ return {
   isArrayLikeObject,
   isElement,
   isFinite,
+  isFunction,
+  isInteger,
+  isLength,
+  isMap,
+  
+  
 
 }
 }()
