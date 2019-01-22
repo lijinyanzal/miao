@@ -429,7 +429,7 @@ function isMap(value) {
 }
 
 function isNaN(value){
-  return (typeof value !== "number" && value === value && value !== null) || (typeof value === "number" && value !== value) 
+  return value !== value
 }
 
 function isNil(value) {
