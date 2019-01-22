@@ -429,7 +429,7 @@ function isMap(value) {
 }
 
 function isNaN(value){
-  return value !== value
+  return typeof value === "number" && value !== value
 }
 
 function isNil(value) {
@@ -440,9 +440,18 @@ function isNull(value){
   return value === null 
 }
 
-// function isNumber(value){
-  
-// }
+function isNumber(value){
+  return typeof value === "number"
+}
+
+function isObject(value) {
+  let toString = Object.prototype.toString
+  return (typeof value === "object" || typeof value === "function") && (toString.call(value) === "[object Object]" || toString.call(value) === "[object Array]" || toString.call(value) === "[object Function]" || toString.call(value) === "[object RegExp]")
+}
+
+function isObjectLike(value) {
+  return typeof value === "object" && value !== null
+}
 
 return {
   chunk,
@@ -495,6 +504,11 @@ return {
   isNaN,
   isNil,
   isNull,
+  isNumber,
+  isObject,
+  isObjectLike,
+  
+  
   
   
   
