@@ -429,8 +429,12 @@ function isMap(value) {
 }
 
 function isNaN(value){
-  let toString = Object.prototype.toString
-  return toString.call(value) === "[object number]" && window.isNaN(value)
+  if (value !== value) {
+    return true
+  } else if (typeof value === "object") {
+    return value.toString() === "NaN"
+  }
+  return false
 }
 
 function isNil(value) {
@@ -458,6 +462,20 @@ function isPlainObject(value) {
   return value.__proto__ === Object.prototype || value.__proto__ == null 
 }
 
+function isSafeInteger(value){
+  return  isInteger(value) && value >= -(2**53 - 1) && value <= 2**53 - 1
+}
+
+function isNative(value) {
+  return value.toString().includes("[native code]")
+}
+
+function isRegExp(value) {
+  return Object.prototype.toString.call(value) === "[object RegExp]"
+}
+function isSet(value) {
+  return Object.prototype.toString.call(value) === "[object Set]"
+}
 
 return {
   chunk,
@@ -514,11 +532,13 @@ return {
   isObject,
   isObjectLike,
   isPlainObject,
-  
-  
+  isSafeInteger,
+  isNative,
+  isRegExp,
+  isSet,
   
   
   
 
-}
+  }
 }()
