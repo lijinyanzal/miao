@@ -505,6 +505,62 @@ function isWeakSet(value){
   return Object.prototype.toString.call(value) === "[object WeakSet]"  
 }
 
+function lt(value, other){
+  return value < other 
+}
+
+function lte(value, other){
+  return value <= other
+}
+
+function toArray(value){
+  if (isObject(value)) {
+    return Object.values(value)
+  } else if (isString(value)) {
+    return value.split("")
+  } else if (isNumber(value) || isNil(value)) {
+    return []
+  }
+}
+
+function toFinite(value) {
+  if (isFinite(Number(value))) {
+    return Number(value)
+  } else if (value === Infinity) {
+    return 1.7976931348623157e+308
+  } else if (value === -Infinity) {
+    return -1.7976931348623157e+308
+  } else if (value === Number.MIN_VALUE) {
+    return 5e-324
+  } else if (value === Number.MIN_VALUE) {
+    return 1.7976931348623157e+308
+  } else if (value === Number.MAX_SAFE_INTEGER) {
+    return 9007199254740991
+  } else if (value === Number.MIN_SAFE_INTEGER) {
+    return -9007199254740991
+  } else if (value === Number.EPSILON) {
+    return 2.220446049250313e-16
+  }
+}
+
+function toInteger(value) {
+  if (isNaN(value)) {
+    return 0
+  } else if (isFinite(Number(value))){
+    return Number(value) > 0 ? Math.floor(Number(value)) : -Math.floor(Math.abs(Number(value)))
+  } else if (value === Number.MIN_VALUE) {
+    return 0
+  } else if (value === Infinity){
+    return 1.7976931348623157e+308
+  }  
+}
+
+// function toLength(value){
+  
+  
+  
+// }
+
 return {
   chunk,
   compact,
@@ -570,6 +626,14 @@ return {
   isTypedArray,
   isWeakMap,
   isWeakSet,
+  lt,
+  lte,
+  toArray,
+  toFinite,
+  toInteger,
+  
+  
+  
   
   
   
