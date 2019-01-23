@@ -555,11 +555,59 @@ function toInteger(value) {
   }  
 }
 
-// function toLength(value){
-  
-  
-  
-// }
+function toLength(value){
+  if (value === Infinity) {
+    return 4294967295
+  } else if (Number(value) < 0) {
+    return 0
+  } else if (value >= Number.MAX_VALUE){
+    return 4294967295
+  } else if (toInteger(value) >= 0) {
+    return toInteger(value)
+  }
+}
+
+function toNumber(value){
+  if(value === Infinity){
+    return Infinity
+  } else if (value === -Infinity){
+    return -Infinity
+  } else if (isFinite(Number(value))) {
+    return toFinite(Number(value))
+  }
+}
+
+function toSafeInteger(value){
+  if (value >= 9007199254740991){
+    return 9007199254740991
+  } else if (value <= -9007199254740991) {
+    return -9007199254740991
+  } else if (isNumber(Number(value))) {
+    return toInteger(value)
+  }
+}
+
+function add(augend, addend){
+  return augend + addend
+}
+
+function divide(dividend, divisor){
+  if (divisor == 0) {
+    return NaN
+  }
+  return dividend / divisor
+}
+
+function max(array){
+  if (!array || array.length == 0) {
+    return undefined
+  } else {
+    return Math.max(...array)
+  }
+}
+
+
+
 
 return {
   chunk,
@@ -631,6 +679,16 @@ return {
   toArray,
   toFinite,
   toInteger,
+  toLength,
+  toNumber,
+  toSafeInteger,
+  add,
+  divide,
+  max,
+  
+  
+  
+  
   
   
   
