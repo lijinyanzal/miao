@@ -250,12 +250,12 @@ function identity(value) {
   return value
 }
 
-// function sumBy(ary, iteratee = identity) {
-//   return ary.reduce((res, item) => {
-//     res += iteratee(item)
-//     return res
-//   }, 0)
-// }
+function sumBy(ary, iteratee = identity) {
+  return ary.reduce((res, item) => {
+    res += iteratee(item)
+    return res
+  }, 0)
+}
 
 function sum(ary) {
   return ary.reduce((res, item) => {
@@ -348,17 +348,17 @@ function isBoolean(value) {
 // find
 // isEqual
 
-// function iteratee(func = identity) {
-//   if (typeof func === "function") {
-//     return func
-//   } else if (typeof func === "string") {
-//     return property(func)
-//   } else if (Array.isArray(func)) {
-//     return matchesProperty(func)
-//   } else if (){
-//     return obj => isMatch(obj, func)
-//   }
-// } 
+function iteratee(func = identity) {
+  if (typeof func === "function") {
+    return func
+  } else if (typeof func === "string") {
+    return property(func)
+  } else if (Array.isArray(func)) {
+    return matchesProperty(func)
+  } else if (isObject(func)){
+    return matches(func)
+  }
+} 
 function isArguments(value){
   let toString = Object.prototype.toString
   return toString.call(value) === '[object Arguments]'  
@@ -606,6 +606,37 @@ function max(array){
   }
 }
 
+function maxBy(array, iteratee = identity) {
+  if (!array || array.length == 0) {
+    return undefined
+  } else {
+    let max = -Infinity
+    let map = {}
+    for (var  i = 0; i < array.length; i++) {
+      if (max < iteratee(array[i])) {
+        max = iteratee(array[i])
+        map[iteratee(array[i])] = array[i]
+      }
+    }
+    return map[max]
+  }
+}
+
+function mean(array){
+  let sum = array.reduce((res, item) => {
+    res += item
+    return res
+  }, 0)
+  return sum / array.length
+}
+
+function meanBy(array, iteratee = identity) {
+  let sum = array.reduce((res, item) => {
+    res += iteratee(item)
+    return res
+  }, 0)
+  return sum / array.length
+}
 
 
 
@@ -685,6 +716,10 @@ return {
   add,
   divide,
   max,
+  mean,
+  meanBy,
+  maxBy,
+  
   
   
   
