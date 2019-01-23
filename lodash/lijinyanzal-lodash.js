@@ -476,6 +476,34 @@ function isRegExp(value) {
 function isSet(value) {
   return Object.prototype.toString.call(value) === "[object Set]"
 }
+function isString(value){
+  return Object.prototype.toString.call(value) === "[object String]"
+}
+function isSymbol(value){
+  return Object.prototype.toString.call(value) === "[object Symbol]"
+}
+
+function isUndefined(value){
+  return Object.prototype.toString.call(value) === "[object Undefined]" 
+}
+
+function isTypedArray(value){
+  let toString = Object.prototype.toString
+  var typedArrayTypes = ["Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Uint16Array","Int32Array","Uint32Array","Float32Array","Float64Array"]
+  for (let i = 0; i < typedArrayTypes.length; i++) {
+    if (toString.call(value).includes(typedArrayTypes[i])) {
+      return true
+    }
+  }
+  return false
+}
+function isWeakMap(value){
+  return Object.prototype.toString.call(value) === "[object WeakMap]"  
+}
+
+function isWeakSet(value){
+  return Object.prototype.toString.call(value) === "[object WeakSet]"  
+}
 
 return {
   chunk,
@@ -536,6 +564,17 @@ return {
   isNative,
   isRegExp,
   isSet,
+  isString,
+  isSymbol,
+  isUndefined,
+  isTypedArray,
+  isWeakMap,
+  isWeakSet,
+  
+  
+  
+  
+  
   
   
   
