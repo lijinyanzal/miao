@@ -769,12 +769,12 @@ function forIn(object, predicate = identity){
 function differenceBy(array, ...args) {
   let predicate
   if (typeof arguments[arguments.length - 1] === "string" || 
-  typeof (arguments[arguments.length - 1]) === "function" || isObject(arguments[arguments.length - 1])) {
+  typeof (arguments[arguments.length - 1]) === "function") {
     predicate = iteratee(args.pop())
   } else {
     predicate = identity
   }
-  let newArgs = flattenDeep([...args]).reduce((res, item) => {
+  let newArgs = ([...args]).reduce((res, item) => {
     res.push(predicate(item))
     return res
   }, [])
@@ -782,13 +782,22 @@ function differenceBy(array, ...args) {
   return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
 
-// function isEqual(value, other) {
-//   if(isNumber(value) && isNumber(other)) 
+function isEqual(value, other) {
+  if(isNumber(value) && isNumber(other) || isString(value) && isString(other) ) {
+    if (value === value) {
+      return true
+    }
+    return false
+  } else if (isArray(value) && isArray(other)) {
+    if (difference())
+    
+    
+  }
   
   
   
   
-// }
+}
 
 
 
