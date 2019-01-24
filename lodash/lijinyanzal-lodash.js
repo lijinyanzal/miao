@@ -266,14 +266,14 @@ function sum(ary) {
 }
   
 
-function differenceBy(ary, values, predicate = identity) {
-  predicate = iteratee(predicate)
-  let newVal = values.reduce((res, item) => {
-    res.push(item)
-    return res
-  }, []).map(item => predicate(item))
-  return ary.map(it => predicate(it)).filter(item => !(newVal.inclueds(predicate(item))))
-} 
+// function differenceBy(ary, values, predicate = identity) {
+//   predicate = iteratee(predicate)
+//   let newVal = values.reduce((res, item) => {
+//     res.push(item)
+//     return res
+//   }, []).map(item => predicate(item))
+//   return ary.map(it => predicate(it)).filter(item => !(newVal.inclueds(predicate(item))))
+// } 
  
 function isMatch(obj, src) {
   for (let key in src) {
@@ -350,17 +350,17 @@ function isBoolean(value) {
 // find
 // isEqual
 
-// function iteratee(func = identity) {
-//   if (typeof func === "function") {
-//     return func
-//   } else if (typeof func === "string") {
-//     return property(func)
-//   } else if (Array.isArray(func)) {
-//     return matchesProperty(func)
-//   } else if (isObject(func)){
-//     return matches(func)
-//   }
-// } 
+function iteratee(func = identity) {
+  if (typeof func === "function") {
+    return func
+  } else if (typeof func === "string") {
+    return property(func)
+  } else if (Array.isArray(func)) {
+    return matchesProperty(func)
+  } else if (isObject(func)){
+    return matches(func)
+  }
+} 
 function isArguments(value){
   let toString = Object.prototype.toString
   return toString.call(value) === '[object Arguments]'  
@@ -650,19 +650,19 @@ function min(array){
     return Math.min(...array)
   }
 }
-function iteratee(func = identity) {
-  if (isFunction(func)) {
-    return func
-  } else if (isArray(func)) {
-    return matchesProperty(...func)
-  } else if (isObject(func)&&!isArray(func)) {
-    return obj => isMatch(obj, func)
-  } else if (isString(func)) {
-    if (func[0] == '\/' && func[func.length-1] == '\/') 
-      return str => (new RegExp(join(slice(split(func, ''), 1, func.length - 1), ''))).test(str)
-    return property(func)
-  }
-}
+// function iteratee(func = identity) {
+//   if (isFunction(func)) {
+//     return func
+//   } else if (isArray(func)) {
+//     return matchesProperty(...func)
+//   } else if (isObject(func)&&!isArray(func)) {
+//     return obj => isMatch(obj, func)
+//   } else if (isString(func)) {
+//     if (func[0] == '\/' && func[func.length-1] == '\/') 
+//       return str => (new RegExp(join(slice(split(func, ''), 1, func.length - 1), ''))).test(str)
+//     return property(func)
+//   }
+// }
 
 function minBy(array, predicate = identity) {
   predicate = iteratee(predicate)
@@ -738,6 +738,27 @@ function inRange(number, start = 0, end){
     
 //   }
 // }
+
+function findKey(object, predicate = identity) {
+   predicate = iteratee(predicate)
+   for (let key in object) {
+     if (predicate(object[key])) {
+       return key
+     }
+   }
+}
+
+function findLastKey(object, predicate = identity) {
+  predicate = iteratee(predicate)
+  let keys  = Object.keys(object).reverse()
+  let item
+  for (let i in keys){
+    item = keys[i]
+    if (item in object && predicate(object[item])) {
+      return item
+    }
+  }
+}
 
 
 
@@ -835,6 +856,10 @@ return {
   
   clamp,
   inRange,
+  findKey,
+  findLastKey,
+  
+  
   
   
   
