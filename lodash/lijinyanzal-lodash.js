@@ -732,6 +732,10 @@ function inRange(number, start = 0, end){
 //   }
 // }
 
+function defaults(object, ...sources){
+  
+}
+
 
 
 return {
@@ -826,7 +830,6 @@ return {
   
   clamp,
   inRange,
-  random,
   
   
   
