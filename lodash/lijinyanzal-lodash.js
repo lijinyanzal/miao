@@ -672,7 +672,7 @@ function subtract(minuend, subtrahend){
 
 function clamp(number, lower = undefined, upper){
   if (number >= upper) {
-    return uppper
+    return upper
   } else {
     if (lower ) {
       if (number <= lower) {
