@@ -265,13 +265,13 @@ function sum(ary) {
 }
   
 
-// function differenceBy(ary, values, iteratee) {
-//   let newVal = values.reduce((res, item) => {
-//     res.push(item)
-//     return res
-//   }, []).map(item => iteratee(item))
-//   return ary.map(it => iteratee(it)).filter(item => !(newVal.inclueds(iteratee(item))))
-// } 
+function differenceBy(ary, values, iteratee) {
+  let newVal = values.reduce((res, item) => {
+    res.push(item)
+    return res
+  }, []).map(item => iteratee(item))
+  return ary.map(it => iteratee(it)).filter(item => !(newVal.inclueds(iteratee(item))))
+} 
  
 function isMatch(obj, src) {
   for (let key in src) {
@@ -348,17 +348,17 @@ function isBoolean(value) {
 // find
 // isEqual
 
-function iteratee(func = identity) {
-  if (typeof func === "function") {
-    return func
-  } else if (typeof func === "string") {
-    return property(func)
-  } else if (Array.isArray(func)) {
-    return matchesProperty(func)
-  } else if (isObject(func)){
-    return matches(func)
-  }
-} 
+// function iteratee(func = identity) {
+//   if (typeof func === "function") {
+//     return func
+//   } else if (typeof func === "string") {
+//     return property(func)
+//   } else if (Array.isArray(func)) {
+//     return matchesProperty(func)
+//   } else if (isObject(func)){
+//     return matches(func)
+//   }
+// } 
 function isArguments(value){
   let toString = Object.prototype.toString
   return toString.call(value) === '[object Arguments]'  
@@ -606,21 +606,21 @@ function max(array){
   }
 }
 
-// function maxBy(array, iteratee = identity) {
-//   if (!array || array.length == 0) {
-//     return undefined
-//   } else {
-//     let max = -Infinity
-//     let map = {}
-//     for (var  i = 0; i < array.length; i++) {
-//       if (max < iteratee(array[i])) {
-//         max = iteratee(array[i])
-//         map[iteratee(array[i])] = array[i]
-//       }
-//     }
-//     return map[max]
-//   }
-// }
+function maxBy(array, iteratee = identity) {
+  if (!array || array.length == 0) {
+    return undefined
+  } else {
+    let max = -Infinity
+    let map = {}
+    for (var  i = 0; i < array.length; i++) {
+      if (max < iteratee(array[i])) {
+        max = iteratee(array[i])
+        map[iteratee(array[i])] = array[i]
+      }
+    }
+    return map[max]
+  }
+}
 
 function mean(array){
   let sum = array.reduce((res, item) => {
@@ -630,13 +630,13 @@ function mean(array){
   return sum / array.length
 }
 
-// function meanBy(array, iteratee = identity) {
-//   let sum = array.reduce((res, item) => {
-//     res += iteratee(item)
-//     return res
-//   }, 0)
-//   return sum / array.length
-// }
+function meanBy(array, iteratee = identity) {
+  let sum = array.reduce((res, item) => {
+    res += iteratee(item)
+    return res
+  }, 0)
+  return sum / array.length
+}
 
 function min(array){
   if (!array || array.length == 0) {
@@ -645,22 +645,35 @@ function min(array){
     return Math.min(...array)
   }
 }
+function iteratee(func = identity) {
+  if (isFunction(func)) {
+    return func
+  } else if (isArray(func)) {
+    return matchesProperty(...func)
+  } else if (isObject(func)&&!isArray(func)) {
+    return obj => isMatch(obj, func)
+  } else if (isString(func)) {
+    if (func[0] == '\/' && func[func.length-1] == '\/') 
+      return str => (new RegExp(join(slice(split(func, ''), 1, func.length - 1), ''))).test(str)
+    return property(func)
+  }
+}
 
-// function minBy(array, iteratee = identity) {
-//   if (!array || array.length == 0) {
-//     return undefined
-//   } else {
-//     let min = Infinity
-//     let map = {}
-//     for (var  i = 0; i < array.length; i++) {
-//       if (min > iteratee(array[i])) {
-//         min = iteratee(array[i])
-//         map[iteratee(array[i])] = array[i]
-//       }
-//     }
-//     return map[min]
-//   }
-// }
+function minBy(array, iteratee = identity) {
+  if (!array || array.length == 0) {
+    return undefined
+  } else {
+    let min = Infinity
+    let map = {}
+    for (var  i = 0; i < array.length; i++) {
+      if (min > iteratee(array[i])) {
+        min = iteratee(array[i])
+        map[iteratee(array[i])] = array[i]
+      }
+    }
+    return map[min]
+  }
+}
 
 function multiply(multiplier, multiplicand){
   return multiplier * multiplicand
@@ -718,6 +731,8 @@ function random(lower = 0, upper = 1, floating = false){
     
   }
 }
+
+
 
 return {
   chunk,
