@@ -250,9 +250,10 @@ function identity(value) {
   return value
 }
 
-function sumBy(ary, iteratee = identity) {
+function sumBy(ary, predicate = identity) {
+  predicate = iteratee(predicate)
   return ary.reduce((res, item) => {
-    res += iteratee(item)
+    res += predicate(item)
     return res
   }, 0)
 }
@@ -265,12 +266,13 @@ function sum(ary) {
 }
   
 
-function differenceBy(ary, values, iteratee) {
+function differenceBy(ary, values, predicate = identity) {
+  predicate = iteratee(predicate)
   let newVal = values.reduce((res, item) => {
     res.push(item)
     return res
-  }, []).map(item => iteratee(item))
-  return ary.map(it => iteratee(it)).filter(item => !(newVal.inclueds(iteratee(item))))
+  }, []).map(item => predicate(item))
+  return ary.map(it => predicate(it)).filter(item => !(newVal.inclueds(predicate(item))))
 } 
  
 function isMatch(obj, src) {
@@ -606,16 +608,18 @@ function max(array){
   }
 }
 
-function maxBy(array, iteratee = identity) {
+function maxBy(array, predicate = identity) {
+  predicate = iteratee(predicate)
   if (!array || array.length == 0) {
     return undefined
   } else {
     let max = -Infinity
     let map = {}
     for (var  i = 0; i < array.length; i++) {
-      if (max < iteratee(array[i])) {
-        max = iteratee(array[i])
-        map[iteratee(array[i])] = array[i]
+      let item = predicate(array[i])
+      if (max < item) {
+        max = item
+        map[item] = array[i]
       }
     }
     return map[max]
@@ -630,9 +634,10 @@ function mean(array){
   return sum / array.length
 }
 
-function meanBy(array, iteratee = identity) {
+function meanBy(array, predicate = identity) {
+  predicate = iteratee(predicate)
   let sum = array.reduce((res, item) => {
-    res += iteratee(item)
+    res += predicate(item)
     return res
   }, 0)
   return sum / array.length
@@ -659,16 +664,18 @@ function iteratee(func = identity) {
   }
 }
 
-function minBy(array, iteratee = identity) {
+function minBy(array, predicate = identity) {
+  predicate = iteratee(predicate)
   if (!array || array.length == 0) {
     return undefined
   } else {
     let min = Infinity
     let map = {}
     for (var  i = 0; i < array.length; i++) {
-      if (min > iteratee(array[i])) {
-        min = iteratee(array[i])
-        map[iteratee(array[i])] = array[i]
+      let item = predicate(array[i])
+      if (min > item) {
+        min = item
+        map[item] = array[i]
       }
     }
     return map[min]
@@ -733,7 +740,8 @@ function inRange(number, start = 0, end){
 // }
 
 function defaults(object, ...sources){
-  
+  let src = {}
+   
 }
 
 
