@@ -768,7 +768,7 @@ function forIn(object, predicate = identity){
 
 function differenceBy(array, ...args) {
   let predicate
-  if (typeof arguments[length - 1] === "string" || isPlainObject(arguments[length - 1])) {
+  if (typeof arguments[length - 1] === "string" || typeof (arguments[length - 1]) === "function" || isObject(arguments[length - 1])) {
     predicate = iteratee(args.pop())
   } else {
     predicate = identity
@@ -781,7 +781,13 @@ function differenceBy(array, ...args) {
   return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
 
-
+function isEqual(value, other) {
+  if (!)
+  
+  
+  
+  
+}
 
 
 
