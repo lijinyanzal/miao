@@ -780,22 +780,28 @@ function differenceBy(array, ...args) {
   return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
 
-// function isEqual(value, other) {
-//   if(isNumber(value) && isNumber(other) || isString(value) && isString(other) ) {
-//     if (value === value) {
-//       return true
-//     }
-//     return false
-//   } else if (isArray(value) && isArray(other)) {
-//     if (value.length == other.length && difference(value, other).length == 0 && difference(other, value).length == 0) {
-//       return true
-//     }
-//     return false
-//   } else if (Object.prototype.toString.call(value) === "[object Object]" &&　Object.prototype.toString.call(other) === "[object Object]") {
- 
-//   }
-
-// }
+function isEqual(value, other) {
+  if (value !== value && other !== other) {
+    return true
+  } else if(isNumber(value) && isNumber(other) || isString(value) && isString(other) ) {
+    if (value === other) {
+      return true
+    }
+    return false
+  } else if (isArray(value) && isArray(other)) {
+    if (value.length == other.length && difference(value, other).length == 0 && difference(other, value).length == 0) {
+      return true
+    }
+    return false
+  } else if (Object.prototype.toString.call(value) === "[object Object]" &&　Object.prototype.toString.call(other) === "[object Object]") {
+    for (let key in value) {
+      if (other[key] !== value[key] || !isEqual(Object.keys(other), Object.keys(value))) {
+        return false
+      }
+    }
+    return true
+  }
+}
 
 
 
@@ -898,6 +904,8 @@ return {
   findLastKey,
   forIn,
   differenceBy,
+  isEqual,
+  
   
 
 
