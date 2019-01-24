@@ -804,7 +804,7 @@ return {
   // ceil,
   // floor,
   
-  clap,
+  clamp,
   inRange,
   random,
   
