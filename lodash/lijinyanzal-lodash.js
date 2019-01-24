@@ -782,22 +782,22 @@ function differenceBy(array, ...args) {
   return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
 
-function isEqual(value, other) {
-  if(isNumber(value) && isNumber(other) || isString(value) && isString(other) ) {
-    if (value === value) {
-      return true
-    }
-    return false
-  } else if (isArray(value) && isArray(other)) {
-    if (difference())
+// function isEqual(value, other) {
+//   if(isNumber(value) && isNumber(other) || isString(value) && isString(other) ) {
+//     if (value === value) {
+//       return true
+//     }
+//     return false
+//   } else if (isArray(value) && isArray(other)) {
+//     if (difference())
     
     
-  }
+//   }
   
   
   
   
-}
+// }
 
 
 
