@@ -787,15 +787,15 @@ function differenceBy(array, ...args) {
 //     }
 //     return false
 //   } else if (isArray(value) && isArray(other)) {
-//     if (value.length == other.length)
-    
-    
+//     if (value.length == other.length && difference(value, other).length == 0 && difference(other, value).length == 0) {
+//       return true
+//     }
+//     return false
+//   } else if (Object.prototype.toString.call(value) === "[object Object]" &&　Object.prototype.toString.call(other) === "[object Object]") {
+ 
 //   }
-  
-  
-  
-  
-}
+
+// }
 
 
 
@@ -899,25 +899,7 @@ return {
   forIn,
   differenceBy,
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 
   }
 }()
