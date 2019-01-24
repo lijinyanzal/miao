@@ -766,30 +766,19 @@ function forIn(object, predicate = identity){
   return object
 }
 
-function differenceBy(array, values, predicate = identity) {
-  let func = iteratee(predicate)
-  let newArg = values.reduce((res,item) => {
-    if (!Array.isArray(item)) {
-      res.push(func(item))
-    } else {
-      item.forEach(item => res.push(func(item)))
-    }
-    return res
-  }, [])
-  let ary = []
-  for (let i = 0; i < array.length; i++) {
-    ary[i] = array[i]
+function differenceBy(array, ...args) {
+  let predicate
+  if (typeof arguments[length - 1] === "string" || isPlainObject(arguments[length - 1])) {
+    predicate = iteratee(args.pop())
+  } else {
+    predicate = identity
   }
-  ary = ary.reduce((res, item, index) => {
-    res.push(func(item)) 
+  let newArgs = flattenDeep([...args]).reduce((res, item) => {
+    res.push(predicate(item))
     return res
   }, [])
-  return ary.reduce((result, item, index) => {
-    if (!newArg.includes(item)) {
-      result.push(array[index])
-    }
-    return result
-  }, []) 
+  let result = []
+  return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
 
 
