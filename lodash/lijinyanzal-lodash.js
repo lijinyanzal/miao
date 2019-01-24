@@ -760,10 +760,19 @@ function findLastKey(object, predicate = identity) {
   }
 }
 
-// function forIn(object, predicate = identity){
-//   predicate = iteratee(predicate)
-  
-// }
+function forIn(object, predicate = identity){
+  predicate = iteratee(predicate)
+  let keys = Object.keys(object)
+  let obj = Object.getPrototypeOf(object)
+  for(let prop in obj) {
+    keys.push(prop)
+    object[prop] = obj[prop]
+  }
+  for (let i = 0; i < keys.length; i++) {
+    predicate(object[keys[i]], keys[i], object )
+  }
+  return object
+}
 
 
 
@@ -860,6 +869,8 @@ return {
   inRange,
   findKey,
   findLastKey,
+  forIn,
+  
   
   
   
