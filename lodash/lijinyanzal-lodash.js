@@ -606,21 +606,21 @@ function max(array){
   }
 }
 
-function maxBy(array, iteratee = identity) {
-  if (!array || array.length == 0) {
-    return undefined
-  } else {
-    let max = -Infinity
-    let map = {}
-    for (var  i = 0; i < array.length; i++) {
-      if (max < iteratee(array[i])) {
-        max = iteratee(array[i])
-        map[iteratee(array[i])] = array[i]
-      }
-    }
-    return map[max]
-  }
-}
+// function maxBy(array, iteratee = identity) {
+//   if (!array || array.length == 0) {
+//     return undefined
+//   } else {
+//     let max = -Infinity
+//     let map = {}
+//     for (var  i = 0; i < array.length; i++) {
+//       if (max < iteratee(array[i])) {
+//         max = iteratee(array[i])
+//         map[iteratee(array[i])] = array[i]
+//       }
+//     }
+//     return map[max]
+//   }
+// }
 
 function mean(array){
   let sum = array.reduce((res, item) => {
@@ -630,14 +630,45 @@ function mean(array){
   return sum / array.length
 }
 
-function meanBy(array, iteratee = identity) {
-  let sum = array.reduce((res, item) => {
-    res += iteratee(item)
-    return res
-  }, 0)
-  return sum / array.length
+// function meanBy(array, iteratee = identity) {
+//   let sum = array.reduce((res, item) => {
+//     res += iteratee(item)
+//     return res
+//   }, 0)
+//   return sum / array.length
+// }
+
+function min(array){
+  if (!array || array.length == 0) {
+    return undefined
+  } else {
+    return Math.min(...array)
+  }
 }
 
+// function minBy(array, iteratee = identity) {
+//   if (!array || array.length == 0) {
+//     return undefined
+//   } else {
+//     let min = Infinity
+//     let map = {}
+//     for (var  i = 0; i < array.length; i++) {
+//       if (min > iteratee(array[i])) {
+//         min = iteratee(array[i])
+//         map[iteratee(array[i])] = array[i]
+//       }
+//     }
+//     return map[min]
+//   }
+// }
+
+function multiply(multiplier, multiplicand){
+  return multiplier * multiplicand
+}
+
+function subtract(minuend, subtrahend){
+  return minuend - subtrahend 
+}
 
 
 return {
@@ -717,8 +748,14 @@ return {
   divide,
   max,
   mean,
-  meanBy,
-  maxBy,
+  min,
+  multiply,
+
+  // round,
+  // ceil,
+  // floor,
+  
+ 
   
   
   
