@@ -670,6 +670,35 @@ function subtract(minuend, subtrahend){
   return minuend - subtrahend 
 }
 
+function clamp(number, lower = undefined, upper){
+  if (number >= upper) {
+    return uppper
+  } else {
+    if (lower ) {
+      if (number <= lower) {
+        return lower
+      }
+    } else {
+      return number
+    }
+  }  
+}
+
+function inRange(number, start = 0, end){
+  if (arguments.length === 2) {
+    number = arguments[0] 
+    start = 0
+    end = arguments[1] 
+  } 
+  if (end < start && number >= end && number < start) {
+    return true
+  }
+  if (end > start && number >= start && number < end) {
+    return true
+  } 
+  return false
+}
+
 
 return {
   chunk,
@@ -750,12 +779,15 @@ return {
   mean,
   min,
   multiply,
+  subtract,
 
   // round,
   // ceil,
   // floor,
   
- 
+  clap,
+  inRange,
+  
   
   
   
