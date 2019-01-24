@@ -264,16 +264,6 @@ function sum(ary) {
     return res
   }, 0)
 }
-  
-
-// function differenceBy(ary, values, predicate = identity) {
-//   predicate = iteratee(predicate)
-//   let newVal = values.reduce((res, item) => {
-//     res.push(item)
-//     return res
-//   }, []).map(item => predicate(item))
-//   return ary.map(it => predicate(it)).filter(item => !(newVal.inclueds(predicate(item))))
-// } 
  
 function isMatch(obj, src) {
   for (let key in src) {
@@ -776,6 +766,38 @@ function forIn(object, predicate = identity){
   return object
 }
 
+function differenceBy(array, values, predicate = identity) {
+  let func = iteratee(predicate)
+  let newArg = values.reduce((res,item) => {
+    if (!Array.isArray(item)) {
+      res.push(func(item))
+    } else {
+      item.forEach(item => res.push(func(item)))
+    }
+    return res
+  }, [])
+  let ary = []
+  for (let i = 0; i < array.length; i++) {
+    ary[i] = array[i]
+  }
+  ary = ary.reduce((res, item, index) => {
+    res.push(func(item)) 
+    return res
+  }, [])
+  return ary.reduce((result, item, index) => {
+    if (!newArg.includes(item)) {
+      result.push(array[index])
+    }
+    return result
+  }, []) 
+}
+
+
+
+
+
+
+
 
 
 return {
@@ -872,6 +894,8 @@ return {
   findKey,
   findLastKey,
   forIn,
+  differenceBy,
+  
   
   
   
