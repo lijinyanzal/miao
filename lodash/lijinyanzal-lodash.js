@@ -774,10 +774,8 @@ function differenceBy(array, ...args) {
   } else {
     predicate = identity
   }
-  let newArgs = ([...args]).reduce((res, item) => {
-    res.push(predicate(item))
-    return res
-  }, [])
+  let values = [].concat(...args)
+  let newArgs = values.map(item => predicate(item))
   let result = []
   return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
@@ -789,7 +787,7 @@ function differenceBy(array, ...args) {
 //     }
 //     return false
 //   } else if (isArray(value) && isArray(other)) {
-//     if (difference())
+//     if (value.length == other.length)
     
     
 //   }
@@ -797,7 +795,7 @@ function differenceBy(array, ...args) {
   
   
   
-// }
+}
 
 
 
