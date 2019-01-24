@@ -739,10 +739,7 @@ function inRange(number, start = 0, end){
 //   }
 // }
 
-function defaults(object, ...sources){
-  let src = {}
-   
-}
+
 
 
 
