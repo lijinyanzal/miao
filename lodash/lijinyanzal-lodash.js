@@ -740,36 +740,38 @@ function inRange(number, start = 0, end){
 // }
 
 function findKey(object, predicate = identity) {
-   predicate = iteratee(predicate)
+   func = iteratee(predicate)
    for (let key in object) {
-     if (predicate(object[key])) {
+     if (func(object[key])) {
        return key
      }
    }
+   return undefined
 }
 
 function findLastKey(object, predicate = identity) {
-  predicate = iteratee(predicate)
+  func = iteratee(predicate)
   let keys  = Object.keys(object).reverse()
   let item
   for (let i in keys){
     item = keys[i]
-    if (item in object && predicate(object[item])) {
+    if (item in object && func(object[item])) {
       return item
     }
   }
+  return undefined
 }
 
 function forIn(object, predicate = identity){
-  predicate = iteratee(predicate)
+  func = iteratee(predicate)
   let keys = Object.keys(object)
-  let obj = Object.getPrototypeOf(object)
-  for(let prop in obj) {
-    keys.push(prop)
-    object[prop] = obj[prop]
-  }
+  // let obj = Object.getPrototypeOf(object)
+  // for(let prop in obj) {
+  //   keys.push(prop)
+  //   object[prop] = obj[prop]
+  // }
   for (let i = 0; i < keys.length; i++) {
-    predicate(object[keys[i]], keys[i], object )
+    func(object[keys[i]], keys[i], object )
   }
   return object
 }
