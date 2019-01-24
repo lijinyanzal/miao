@@ -781,13 +781,13 @@ function differenceBy(array, ...args) {
   return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
 
-function isEqual(value, other) {
-  if (!)
+// function isEqual(value, other) {
+//   if (!)
   
   
   
   
-}
+// }
 
 
 
