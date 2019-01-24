@@ -350,17 +350,17 @@ function isBoolean(value) {
 // find
 // isEqual
 
-function iteratee(func = identity) {
-  if (typeof func === "function") {
-    return func
-  } else if (typeof func === "string") {
-    return property(func)
-  } else if (Array.isArray(func)) {
-    return matchesProperty(func)
-  } else if (isObject(func)){
-    return matches(func)
-  }
-} 
+// function iteratee(func = identity) {
+//   if (typeof func === "function") {
+//     return func
+//   } else if (typeof func === "string") {
+//     return property(func)
+//   } else if (Array.isArray(func)) {
+//     return matchesProperty(func)
+//   } else if (isObject(func)){
+//     return matches(func)
+//   }
+// } 
 function isArguments(value){
   let toString = Object.prototype.toString
   return toString.call(value) === '[object Arguments]'  
@@ -650,19 +650,19 @@ function min(array){
     return Math.min(...array)
   }
 }
-// function iteratee(func = identity) {
-//   if (isFunction(func)) {
-//     return func
-//   } else if (isArray(func)) {
-//     return matchesProperty(...func)
-//   } else if (isObject(func)&&!isArray(func)) {
-//     return obj => isMatch(obj, func)
-//   } else if (isString(func)) {
-//     if (func[0] == '\/' && func[func.length-1] == '\/') 
-//       return str => (new RegExp(join(slice(split(func, ''), 1, func.length - 1), ''))).test(str)
-//     return property(func)
-//   }
-// }
+function iteratee(func = identity) {
+  if (isFunction(func)) {
+    return func
+  } else if (isArray(func)) {
+    return matchesProperty(...func)
+  } else if (isObject(func)&&!isArray(func)) {
+    return obj => isMatch(obj, func)
+  } else if (isString(func)) {
+    if (func[0] == '\/' && func[func.length-1] == '\/') 
+      return str => (new RegExp(join(slice(split(func, ''), 1, func.length - 1), ''))).test(str)
+    return property(func)
+  }
+}
 
 function minBy(array, predicate = identity) {
   predicate = iteratee(predicate)
@@ -760,7 +760,10 @@ function findLastKey(object, predicate = identity) {
   }
 }
 
-
+// function forIn(object, predicate = identity){
+//   predicate = iteratee(predicate)
+  
+// }
 
 
 
@@ -768,7 +771,6 @@ return {
   chunk,
   compact,
   difference,
-  differenceBy,
   drop,
   dropRight,
   fill,
