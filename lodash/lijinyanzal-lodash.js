@@ -708,25 +708,25 @@ function inRange(number, start = 0, end){
   return false
 }
 
-// function random(lower = 0, upper = 1, floating = false){
-//   if (arguments.length == 1 || arguments.length == 2 && typeof arguments[1] === "Boolean" ) {
-//     if (arguments[0] > 0) {
-//       lower = 0
-//       upper = arguments[0]
-//     } else if (arguments[0] < 0) {
-//       lower = arguments[0]
-//       upper = 0
-//     }
-//   }
-//   if (floating) {
-//     return Math.random() * (upper - lower) + min
-//   } else {
-//     lower = Math.ceil(lower)
-//     upper = Math.floor(upper)
-//     return Math.floor(Math.random() * (upper - lower)) + lower
+function random(lower = 0, upper = 1, floating = false){
+  if (arguments.length == 1 || arguments.length == 2 && typeof arguments[1] === "Boolean" ) {
+    if (arguments[0] > 0) {
+      lower = 0
+      upper = arguments[0]
+    } else if (arguments[0] < 0) {
+      lower = arguments[0]
+      upper = 0
+    }
+  }
+  if (floating) {
+    return Math.random() * (upper - lower + 1) + min
+  } else {
+    lower = Math.ceil(lower)
+    upper = Math.floor(upper)
+    return Math.floor(Math.random() * (upper - lower + 1)) + lower
     
-//   }
-// }
+  }
+}
 
 function findKey(object, predicate = identity) {
    func = iteratee(predicate)
@@ -926,7 +926,7 @@ return {
   forIn,
   differenceBy,
   isEqual,
-  
+  random,
   
 
 
