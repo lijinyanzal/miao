@@ -278,15 +278,11 @@ function isMatch(obj, src) {
   }
 }
 
-function matches(src) {
+function matches(target) {
   return function (obj) {
-    for (let key in src) {
-      if (src[key] !== obj[key]) {
-        if (!isMatch(src[key], obj[key])) {
-          return false
-        } else if (src[key] !== obj[key]) {
-          return false
-        }
+    for (let key of target) {
+      if (target[key] !== obj[key]) {
+        return false
       }
     }
     return true
@@ -514,6 +510,9 @@ function toArray(value){
     return []
   }
 }
+
+// Array.from(new Set([1, 1, 1, 2, 2, 2, 3, 3]))
+// [].slice.call({0: 1, 1: 3, 2: 5})
 
 function toFinite(value) {
   if (isFinite(Number(value))) {
@@ -780,7 +779,7 @@ function differenceBy(array, ...args) {
   return result = array.filter(item => !newArgs.includes(predicate(item)))
 }
 
-function isEqual(value, other) {
+ function isEqual(value, other) {
   if (value !== value && other !== other) {
     return true
   } else if(isNumber(value) && isNumber(other) || isString(value) && isString(other) ) {
@@ -789,10 +788,22 @@ function isEqual(value, other) {
     }
     return false
   } else if (isArray(value) && isArray(other)) {
-    if (value.length == other.length && difference(value, other).length == 0 && difference(other, value).length == 0) {
+    if (value.length !== other.length) {
+      return false
+    } else {
+      for(let i = 0; i < value.length; i++) {
+        if(isObject(value[i]) ) {
+          if (isObject(other[i]) && isMatch(value[i], other[i]) &&　isMatch(other[i], value[i])) {
+            return true
+          } else {
+            return false
+          }
+        } else  if (value[i] !== other[i]){
+          return false
+        }
+      }
       return true
     }
-    return false
   } else if (Object.prototype.toString.call(value) === "[object Object]" &&　Object.prototype.toString.call(other) === "[object Object]") {
     for (let key in value) {
       if (other[key] !== value[key] || !isEqual(Object.keys(other), Object.keys(value))) {
@@ -801,11 +812,21 @@ function isEqual(value, other) {
     }
     return true
   }
+  return false
 }
 
+// function includes(collection, value, fromIndex = 0){
+//   return collection.includes(value, fromIndex)
+// }
 
-
-
+// function eq(value, other){
+//   if (value !== value && other !== other) {
+//     return true
+//   } else if (value === other){
+//     return true
+//   }
+//   return false
+// }
 
 
 
