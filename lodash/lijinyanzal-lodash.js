@@ -719,11 +719,11 @@ function random(lower = 0, upper = 1, floating = false){
     }
   }
   if (floating) {
-    return Math.random() * (upper - lower + 1) + min
+    return Math.random() * (upper - lower) + min
   } else {
     lower = Math.ceil(lower)
     upper = Math.floor(upper)
-    return Math.floor(Math.random() * (upper - lower + 1)) + lower
+    return Math.floor(Math.random() * (upper - lower)) + lower
     
   }
 }
