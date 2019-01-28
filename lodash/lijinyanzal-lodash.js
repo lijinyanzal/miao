@@ -833,7 +833,7 @@ function dropRight(ary, n = 1) {
 function dropRightWhile(array, predicate = identity) {
   predicate = iteratee(predicate)
   for (let i = array.length; i >= 0; i--) {
-    if (!predicate(array[i])) {
+    if (array[i] && !predicate(array[i])) {
       array.slice(0, i + 1 )
     }
   }
@@ -842,13 +842,18 @@ function dropRightWhile(array, predicate = identity) {
 function dropWhile(array, predicate = identity) {
   predicate = iteratee(predicate)
   for (let i = 0 ; i < array.length; i++) {
-    if (!predicate(array[i])) {
+    if (array[i] && !predicate(array[i])) {
       array.slice(i)
     }
   } 
 }
 
-
+// function findIndex(array, predicate = identity, fromIndex = 0) {
+  
+  
+  
+  
+// }
 
 
 
@@ -952,6 +957,8 @@ return {
   isEqual,
   random,
   dropRightWhile,
+  dropWhile,
+  
   
   
 
