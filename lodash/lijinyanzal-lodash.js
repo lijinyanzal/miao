@@ -839,6 +839,14 @@ function dropRightWhile(array, predicate = identity) {
   }
 }
 
+function dropWhile(array, predicate = identity) {
+  predicate = iteratee(predicate)
+  for (let i = 0 ; i < array.length; i++) {
+    if (!predicate(array[i])) {
+      array.slice(i)
+    }
+  } 
+}
 
 
 
