@@ -715,7 +715,7 @@ function random(lower = 0, upper = 1, floating = false){
 function findKey(object, predicate = identity) {
    func = iteratee(predicate)
    for (let key in object) {
-     if (func(object[key])) {
+     if (func(object[key]) !== null) {
        return key
      }
    }
@@ -728,7 +728,7 @@ function findLastKey(object, predicate = identity) {
   let item
   for (let i in keys){
     item = keys[i]
-    if (item in object && func(object[item])) {
+    if (item in object && func(object[item]) !== null) {
       return item
     }
   }
@@ -822,7 +822,7 @@ function dropRight(ary, n = 1) {
 function dropRightWhile(array, predicate = identity) {
   predicate = iteratee(predicate)
   for (let i = array.length; i >= 0; i--) {
-    if (array[i] && !predicate(array[i])) {
+    if (array[i] !== null && !predicate(array[i])) {
       return array.slice(0, i + 1 )
     }
   }
@@ -831,7 +831,7 @@ function dropRightWhile(array, predicate = identity) {
 function dropWhile(array, predicate = identity) {
   predicate = iteratee(predicate)
   for (let i = 0 ; i < array.length; i++) {
-    if (array[i] && !predicate(array[i])) {
+    if (array[i] !== null && !predicate(array[i])) {
       return array.slice(i)
     }
   } 
