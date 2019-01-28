@@ -70,12 +70,7 @@ function initial(array) {
   return array.slice(0, array.length - 1)
 }
  
-function intersection(ary) {
-  let prev = arguments[0]
-  let remain = arguments[1]
-  let result 
-  return  result = prev.filter(item => remain.includes(item))
-}
+
 
 function join(ary, sep = ",") {
    return ary.reduce((result, item, index) => {
@@ -728,7 +723,7 @@ function findLastKey(object, predicate = identity) {
   let item
   for (let i in keys){
     item = keys[i]
-    if (item in object && func(object[item]) !== null) {
+    if (item in object && !isNil(func(object[item]))) {
       return item
     }
   }
@@ -822,7 +817,7 @@ function dropRight(ary, n = 1) {
 function dropRightWhile(array, predicate = identity) {
   predicate = iteratee(predicate)
   for (let i = array.length; i >= 0; i--) {
-    if (array[i] !== null && !predicate(array[i])) {
+    if (!isNil(array[i]) && !predicate(array[i])) {
       return array.slice(0, i + 1 )
     }
   }
@@ -831,7 +826,7 @@ function dropRightWhile(array, predicate = identity) {
 function dropWhile(array, predicate = identity) {
   predicate = iteratee(predicate)
   for (let i = 0 ; i < array.length; i++) {
-    if (array[i] !== null && !predicate(array[i])) {
+    if (!isNil(array[i]) && !predicate(array[i])) {
       return array.slice(i)
     }
   } 
@@ -840,7 +835,7 @@ function dropWhile(array, predicate = identity) {
 function findIndex(array, predicate = identity, fromIndex = 0) {
   predicate = iteratee(predicate)
   for (let i = fromIndex; i < array.length; i++) {
-    if (array[i] && predicate(array[i])) {
+    if (!isNil(array[i]) && predicate(array[i])) {
       return i
     }
   }
@@ -849,13 +844,32 @@ function findIndex(array, predicate = identity, fromIndex = 0) {
 function findLastIndex(array, predicate = identity, fromIndex = array.length - 1) {
   predicate = iteratee(predicate)
   for (let i = fromIndex; i >= 0; i--) {
-    if (array[i] && predicate(array[i])) {
+    if (!isNil(array[i]) && predicate(array[i])) {
       return i
     }
   }
 }
 
+function intersection(ary) {
+  let prev = arguments[0]
+  let remain = arguments[1]
+  let result 
+  return  result = prev.filter(item => remain.includes(item))
+}
 
+function intersectionBy(arrays, predicate = identity){
+  predicate = iteratee(predicate)
+  let prev = arguments[0]
+  let remain = arguments[1]
+  let src = remain.map(item => predicate(it))
+  let result = []
+  for (let i = 0; i < prev.length; i++) {
+    if (!isNil(prev[i]) && src.includes(predicate(prev[i]))) {
+      result.push(prev[i])
+    }
+  }
+  return result
+}
 
 return {
   chunk,
@@ -958,7 +972,8 @@ return {
   dropWhile,
   findIndex,
   findLastIndex,
-
+  intersectionBy,
+  
   
   
 
