@@ -44,12 +44,7 @@ function drop(ary, n = 1) {
   return ary.slice(n)
 }
 
-function dropRight(ary, n = 1) {
-  if (n >= ary.length) {
-    return []
-  }
-  return ary.slice(0, ary.length - n)
-}
+
 
 function fill(ary, value, start = 0, end = ary.length) {
   for (let i = start; i < end; i++) {
@@ -828,6 +823,27 @@ function differenceBy(array, ...args) {
 //   return false
 // }
 
+function dropRight(ary, n = 1) {
+  if (n >= ary.length) {
+    return []
+  }
+  return ary.slice(0, ary.length - n)
+}
+
+function dropRightWhile(array, predicate = identity) {
+  predicate = iteratee(predicate)
+  for (let i = array.length; i >= 0; i--) {
+    if (!predicate(array[i])) {
+      array.slice(0, i + 1 )
+    }
+  }
+}
+
+
+
+
+
+
 
 
 return {
@@ -927,6 +943,8 @@ return {
   differenceBy,
   isEqual,
   random,
+  dropRightWhile,
+  
   
 
 
