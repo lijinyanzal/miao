@@ -128,20 +128,6 @@ function slice(array, start = 0, end = array.length) {
   return result
 }
 
-function sortedIndex(array, value) {
-  let mid = array.length / 2 | 0
-  if (array[mid] < value && (array[mid + 1] >= value || !array[mid + 1])) {
-    return mid + 1
-  } else if (array[mid] >= value && (array[mid - 1] < value || !array[mid - 1])) {
-    return mid
-  } 
-  if (array[mid] < value) {
-    return sortedIndex(array.slice(mid), value)
-  } else if (array[mid] >= value) {
-    return sortedIndex(array.slice(0, mid), value)
-  }
-
-}
 
 function sortedIndexOf(array, value) {
   let mid = array.length / 2 | 0
@@ -877,6 +863,36 @@ function pullAllBy(array, values, predicate = identity) {
   return array.filter(item => !values.includes(predicate(item)))
 }
 
+function sortedIndex(array, value) {
+  let mid = array.length / 2 | 0
+  if (array[mid] < value && (array[mid + 1] >= value || !array[mid + 1])) {
+    return mid + 1
+  } else if (array[mid] >= value && (array[mid - 1] < value || !array[mid - 1])) {
+    return mid
+  } 
+  if (array[mid] < value) {
+    return sortedIndex(array.slice(mid), value)
+  } else if (array[mid] >= value) {
+    return sortedIndex(array.slice(0, mid), value)
+  }
+}
+
+function sortedIndexBy(array, value, predicate = identity) {
+  predicate = iteratee(predicate)
+  array = array.map(it => predicate(it))
+  let mid = array.length / 2 | 0
+  value = predicate(value)
+  if (array[mid] < value && (array[mid + 1] >= value || !array[mid + 1])) {
+    return mid + 1
+  } else if (array[mid] >= value && (array[mid - 1] < value || !array[mid - 1])) {
+    return mid
+  } 
+  if (array[mid] < value) {
+    return sortedIndexBy(array.slice(mid), value)
+  } else if (array[mid] >= value) {
+    return sortedIndexBy(array.slice(0, mid), value)
+  }
+}
 
 return {
   chunk,
@@ -981,6 +997,7 @@ return {
   findLastIndex,
   intersectionBy,
   pullAllBy,
+  sortedIndexBy,
   
   
   
