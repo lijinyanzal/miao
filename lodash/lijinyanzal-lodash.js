@@ -261,18 +261,13 @@ function sum(ary) {
 }
  
 function isMatch(obj, src) {
-  for (let key in src) {
-    if (src[key] !== obj[key]) {
-      if (!isMatch(src[key], obj[key])) {
-        return false
-      } else {
-        return true 
-      }
-    }
-    return true 
+  if (isEqual(obj, src)) return true
+  for (let prop in src) {
+    if (!(prop in obj) || !isEqual(obj[prop], src[prop]))
+      return false
   }
+  return true
 }
-
 function matches(target) {
   return function (obj) {
     for (let key of target) {
@@ -857,7 +852,14 @@ function findIndex(array, predicate = identity, fromIndex = 0) {
   }
 }
 
-
+function findLastIndex(array, predicate = identity, fromIndex = array.length - 1) {
+  predicate = iteratee(predicate)
+  for (let i = fromIndex; i >= 0; i--) {
+    if (array[i] && predicate(array[i])) {
+      return i
+    }
+  }
+}
 
 
 
@@ -961,6 +963,8 @@ return {
   dropRightWhile,
   dropWhile,
   findIndex,
+  findLastIndex,
+
   
   
 
