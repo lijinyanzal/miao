@@ -268,15 +268,9 @@ function isMatch(obj, src) {
   }
   return true
 }
-function matches(target) {
-  return function (obj) {
-    for (let key of target) {
-      if (target[key] !== obj[key]) {
-        return false
-      }
-    }
-    return true
-  }
+
+function matches(src) {
+  return obj => isMatch(obj, src)
 }
 
 function matchesProperty(obj, src) {
