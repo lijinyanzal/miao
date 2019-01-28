@@ -861,7 +861,7 @@ function intersectionBy(arrays, predicate = identity){
   predicate = iteratee(predicate)
   let prev = arguments[0]
   let remain = arguments[1]
-  let src = remain.map(item => predicate(it))
+  let src = remain.map(item => predicate(item))
   let result = []
   for (let i = 0; i < prev.length; i++) {
     if (!isNil(prev[i]) && src.includes(predicate(prev[i]))) {
