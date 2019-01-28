@@ -871,6 +871,13 @@ function intersectionBy(arrays, predicate = identity){
   return result
 }
 
+function pullAllBy(array, values, predicate = identity) {
+  predicate = iteratee(predicate)
+  values = values.map(item => predicate(item))
+  return array.filter(item => !values.includes(predicate(item)))
+}
+
+
 return {
   chunk,
   compact,
@@ -973,6 +980,7 @@ return {
   findIndex,
   findLastIndex,
   intersectionBy,
+  pullAllBy,
   
   
   
