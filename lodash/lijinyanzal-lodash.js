@@ -141,14 +141,7 @@ function sortedIndexOf(array, value) {
   return -1
 }
 
-function sortedUniq(array) {
-   return array.reduce((result, item, index) => {
-     if (array.indexOf(item, index + 1) == -1) {
-       result.push(item)
-     }
-     return result
-   }, [])
-}
+
 
 function tail(array) {
   return array.slice(1)
@@ -923,7 +916,38 @@ function sortedLastIndexBy(array, value, predicate = identity) {
   }
 }
 
+function sortedLastIndexOf(array, value){
+  let mid = array.length >> 1
+  if (value === array[mid]) {
+    return mid + 1
+  } else if (value > array[mid]) {
+    return sortedLastIndexOf(array.slice(mid), value)
+  } else {
+    return sortedLastIndexOf(array.slice(0, mid), value)
+  } 
+}
 
+function sortedUniq(array) {
+  return array.reduce((result, item, index) => {
+    if (array.indexOf(item, index + 1) == -1) {
+      result.push(item)
+    }
+    return result
+  }, [])
+}
+
+function sortedUniqBy(array, predicate) {
+  predicate = iteratee(predicate)
+  let ary = []
+  let result = []
+  for (let i = 0; i < array.length; i++) {
+    if (!result.includes(predicate(array[i]))) {
+      result.push(predicate(array[i]))
+      ary.push(array[i])
+    }
+  }
+  return ary
+}
 
 return {
   chunk,
@@ -1031,6 +1055,9 @@ return {
   sortedIndexBy,
   sortedLastIndex,
   sortedLastIndexBy,
+  sortedLastIndexOf,
+  sortedUniqBy,
+  
   
   
   
