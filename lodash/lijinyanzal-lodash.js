@@ -975,6 +975,9 @@ function takeWhile(array, predicate = identity) {
   }, [])
 }
 
+// function unionBy(arrays, predicate = identity){
+  
+// }
 
 return {
   chunk,
