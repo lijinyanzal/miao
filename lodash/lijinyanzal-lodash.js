@@ -147,17 +147,6 @@ function tail(array) {
   return array.slice(1)
 }
 
-function take(array, n = 1) {
-  return array.slice(0, n)
-}
-
-function takeRight(array, n = 1) {
-  if (n > array.length) {
-    return array
-  }
-  return array.slice(array.length - n)
-}
-
 function uniq(array) {
   array
 }
@@ -949,6 +938,44 @@ function sortedUniqBy(array, predicate) {
   return ary
 }
 
+function take(array, n = 1) {
+  return array.slice(0, n)
+}
+
+function takeRight(array, n = 1) {
+  if (n > array.length) {
+    return array
+  }
+  return array.slice(array.length - n)
+}
+
+function takeRightWhile(array, predicate = identity) {
+  predicate = iteratee(predicate)
+  let result = []
+  for (let i = array.length - 1; i >= 0; i--) {
+    if (array[array.length - 1] == null || array[array.length - 1] == undefined) {
+      return []
+    }
+    if (array[i] !== null &&  array[i] !== null && predicate(array[i]) === true) {
+      result.push(array[i])
+    } else {
+      break
+    }
+  }
+  return result 
+}
+
+function takeWhile(array, predicate = identity) {
+  predicate = iteratee(predicate)
+  return array.reduce((res, item, index) => {
+    if (predicate(item) === false ) {
+      res =  array.slice(0, index)
+    } 
+    return res
+  }, [])
+}
+
+
 return {
   chunk,
   compact,
@@ -1057,6 +1084,10 @@ return {
   sortedLastIndexBy,
   sortedLastIndexOf,
   sortedUniqBy,
+  takeRightWhile,
+  takeWhile,
+  
+  
   
   
   
