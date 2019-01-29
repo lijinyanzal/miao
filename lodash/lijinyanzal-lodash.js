@@ -894,6 +894,37 @@ function sortedIndexBy(array, value, predicate = identity) {
   }
 }
 
+function sortedLastIndex(array, value){
+  let start = 0
+  let end = array.length - 1
+  if (value < array[start]) {
+    return 0
+  }
+  for (let i = end; i >= 0; i--) {
+    if (array[i] <= value && array[i + 1] === undefined || array[i + 1] > value){
+      return i + 1
+    } 
+  }
+}
+
+function sortedLastIndexBy(array, value, predicate = identity) {
+  predicate = iteratee(predicate)
+  array = array.map(it => predicate(it))
+  value = predicate(value)
+  let start = 0
+  let end = array.length - 1
+  if (value < array[start]) {
+    return 0
+  }
+  for (let i = end; i >= 0; i--) {
+    if (array[i] <= value && array[i + 1] === undefined || array[i + 1] > value){
+      return i + 1
+    } 
+  }
+}
+
+
+
 return {
   chunk,
   compact,
@@ -998,6 +1029,9 @@ return {
   intersectionBy,
   pullAllBy,
   sortedIndexBy,
+  sortedLastIndex,
+  sortedLastIndexBy,
+  
   
   
   
