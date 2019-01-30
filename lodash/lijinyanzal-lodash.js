@@ -586,6 +586,7 @@ function min(array){
     return Math.min(...array)
   }
 }
+
 function iteratee(func = identity) {
   if (isFunction(func)) {
     return func
@@ -956,7 +957,7 @@ function takeRightWhile(array, predicate = identity) {
     if (array[array.length - 1] == null || array[array.length - 1] == undefined) {
       return []
     }
-    if (array[i] !== null &&  array[i] !== null && predicate(array[i]) === true) {
+    if (array[i] !== null &&  array[i] !== undefined && predicate(array[i])) {
       result.push(array[i])
     } else {
       break
@@ -967,12 +968,18 @@ function takeRightWhile(array, predicate = identity) {
 
 function takeWhile(array, predicate = identity) {
   predicate = iteratee(predicate)
-  return array.reduce((res, item, index) => {
-    if (predicate(item) === false ) {
-      res =  array.slice(0, index)
-    } 
-    return res
-  }, [])
+  let result = []
+  for (let i = 0; i < array.length; i++) {
+    if (array[0] == undefined || array[0] == null || !predicate(array[0])) {
+      return []
+    }
+    if (array[i] !== null &&  array[i] !== undefined && predicate(array[i])) {
+      result.push(array[i])
+    } else {
+      break
+    }
+  }
+  return result 
 }
 
 // function unionBy(arrays, predicate = identity){
