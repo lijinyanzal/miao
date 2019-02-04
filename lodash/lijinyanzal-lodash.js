@@ -147,9 +147,6 @@ function tail(array) {
   return array.slice(1)
 }
 
-function uniq(array) {
-  array
-}
 
 function flatten(array) {
   return array.reduce((res, item) => {
@@ -992,6 +989,26 @@ function union(...args) {
   return result
 }
 
+function uniq(array){
+  return Array.from(new Set(array))
+}
+
+function uniqBy(array, predicate = identity) {
+  predicate = iteratee(predicate)
+  let map = []
+  let result = []
+  let ary = array.map((item, index, array) => predicate(item))
+  for (let i = 0; i < ary.length; i++) {
+    if (!map.includes(ary[i])) {
+      map.push(ary[i])
+      result.push(array[i])
+    }
+  }
+  return result 
+}
+
+
+
 return { 
   chunk,
   compact,
@@ -1103,6 +1120,9 @@ return {
   takeRightWhile,
   takeWhile,
   union,
+  uniq,
+  uniqBy,
+  
   
   
   
