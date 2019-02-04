@@ -982,11 +982,17 @@ function takeWhile(array, predicate = identity) {
   return result 
 }
 
-// function unionBy(arrays, predicate = identity){
-  
-// }
 
-return {
+function union(...args) {
+  let ary = args.reduce((res, item) => {
+    res.push(item)
+    return res
+  }, [])
+  let result = Array.from(new Set(flattenDeep(ary)))
+  return result
+}
+
+return { 
   chunk,
   compact,
   difference,
@@ -1096,6 +1102,8 @@ return {
   sortedUniqBy,
   takeRightWhile,
   takeWhile,
+  union,
+  
   
   
   
