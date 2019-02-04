@@ -1007,7 +1007,33 @@ function uniqBy(array, predicate = identity) {
   return result 
 }
 
+function zip(...args) {
+  let ary = _.flatten(args)
+  let result = []
+  let iter = 0
+  for (let count = 0; count < args[0].length; count++) {
+    let item = []
+   
+    for (let i = iter; i < ary.length; i += args[0].length) {
+      item.push(ary[i])
+    }
+    result.push(item)
+    iter++
+  }
+  return result
+}
 
+function unzip(array){
+  let result = []
+  for (let i = 0; i < array[0].length; i++) {
+    let item = []
+    for (let j = 0; j < array.length; j++) {
+      item.push(array[j][i])
+    }
+    result.push(item)
+  }
+  return result
+}
 
 return { 
   chunk,
@@ -1122,6 +1148,8 @@ return {
   union,
   uniq,
   uniqBy,
+  zip,
+  unzip,
   
   
   
