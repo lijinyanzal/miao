@@ -352,7 +352,7 @@ function isInteger(value){
 }
 
 function isLength(value){
-  return isInteger(value) && value >= 0 &&　value <= 2**53 - 1  
+  return isInteger(value) && (value >= 0) && (value <= (2**53 - 1) ) 
 }
 
 function isMap(value) {
@@ -738,7 +738,7 @@ function differenceBy(array, ...args) {
     } else {
       for(let i = 0; i < value.length; i++) {
         if(isObject(value[i]) ) {
-          if (isObject(other[i]) && isMatch(value[i], other[i]) &&　isMatch(other[i], value[i])) {
+          if (isObject(other[i]) && isMatch(value[i], other[i]) && isMatch(other[i], value[i])) {
             return true
           } else {
             return false
@@ -749,7 +749,7 @@ function differenceBy(array, ...args) {
       }
       return true
     }
-  } else if (Object.prototype.toString.call(value) === "[object Object]" &&　Object.prototype.toString.call(other) === "[object Object]") {
+  } else if (Object.prototype.toString.call(value) === "[object Object]"  && (   Object.prototype.toString.call(other) === "[object Object]")) {
     for (let key in value) {
       if (other[key] !== value[key] || !isEqual(Object.keys(other), Object.keys(value))) {
         return false
@@ -1043,13 +1043,11 @@ function xor(...arrays){
   return filter(flatten(arrays),it => !intersection(...arrays).includes(it))
 }
 
-// // function xorBy(...arrays, predicate = identity) {
-//   predicate = iteratee(predicate)
-  
-// // }
-
 function filter(collection, predicate = identity){
   predicate = iteratee(predicate)
+  if (isObject(collection)){
+    collection = Array.from(collection)
+  }  
   return collection.reduce((res, item) => {
     if (predicate(item)) {
       res.push(item)
@@ -1057,6 +1055,26 @@ function filter(collection, predicate = identity){
     return res
   }, [])
 }
+
+function xorBy(arrays, predicate = identity) {
+  predicate = iteratee(predicate)
+  var ary = intersection(...arrays).map(it => predicate(it))
+  return filter(flatten(arrays),item => {
+    !ary.includes(predicate(item))
+  })
+  var array = flatten(arrays)
+  return array.reduce((res, item) => {
+    if (ary.includes(predicate(item))){
+      res.push(array[i])
+    }
+    return res
+  })
+  
+  
+  
+  
+}
+
 
 return { 
   chunk,
@@ -1176,6 +1194,8 @@ return {
   without,
   xor,
   filter,
+  xorBy,
+  
   
   
   
