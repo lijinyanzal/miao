@@ -1079,7 +1079,20 @@ function xorBy(arrays, predicate = identity) {
    return obj
  }
 
-
+function countBy(collection, predicate = identity) {
+  var map = {}
+  predicate = iteratee(predicate)
+  collection = collection.map(it => predicate(it))
+  for (var i = 0; i < collection.length; i++){
+    if (collection[i] in map){
+      map[collection[i]]++
+    } else {
+      map[collection[i]] = 1
+    }
+  }
+  return map
+  
+}
 
 return { 
   chunk,
@@ -1201,6 +1214,8 @@ return {
   filter,
   xorBy,
   zipObject,
+  countBy,
+  
   
   
   
