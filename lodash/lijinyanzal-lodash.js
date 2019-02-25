@@ -1043,10 +1043,20 @@ function xor(...arrays){
   return filter(flatten(arrays),it => !intersection(...arrays).includes(it))
 }
 
-// function xorBy(...arrays, predicate = identity) {
+// // function xorBy(...arrays, predicate = identity) {
+//   predicate = iteratee(predicate)
   
-  
-// }
+// // }
+
+function filter(collection, predicate = identity){
+  predicate = iteratee(predicate)
+  return collection.reduce((res, item) => {
+    if (predicate(item)) {
+      res.push(item)
+    }
+    return res
+  }, [])
+}
 
 return { 
   chunk,
@@ -1165,6 +1175,8 @@ return {
   unzip,
   without,
   xor,
+  filter,
+  
   
   
   
