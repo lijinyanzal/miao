@@ -1116,6 +1116,16 @@ function find(collection, predicate = identity, fromIndex = 0){
   return undefined
 }
 
+function findLast(collection, predicate = identity, fromIndex = collection.length - 1){
+  predicate = iteratee(predicate)
+  var newCollection = collection.map(it => predicate(it))
+  for (var i = fromIndex; i >= 0; i--){
+    if (newCollection[i]) {
+      return collection[i]
+    }
+  }
+  return undefined
+}
 
 return { 
   chunk,
@@ -1240,6 +1250,8 @@ return {
   countBy,
   every,
   find,
+  findLast,
+  
   
   
   
