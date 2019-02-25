@@ -1105,6 +1105,18 @@ function every(collection, predicate = identity){
   return true
 }
 
+function find(collection, predicate = identity, fromIndex = 0){
+  predicate = iteratee(predicate)
+  var newCollection = collection.map(it => predicate(it))
+  for (var i = fromIndex; i < newCollection.length; i++){
+    if (newCollection[i]) {
+      return collection[i]
+    }
+  }
+  return undefined
+}
+
+
 return { 
   chunk,
   compact,
@@ -1227,6 +1239,8 @@ return {
   zipObject,
   countBy,
   every,
+  find,
+  
   
   
   
