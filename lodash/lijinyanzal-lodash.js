@@ -1069,11 +1069,16 @@ function xorBy(arrays, predicate = identity) {
     }
     return res
   })
-  
-  
-  
-  
 }
+
+ function zipObject(props = [], values = []){
+   var obj = {}
+   for (var i = 0; i < props.length; i++){
+     obj[props[i]] = values[i]
+   }
+   return obj
+ }
+
 
 
 return { 
@@ -1195,6 +1200,7 @@ return {
   xor,
   filter,
   xorBy,
+  zipObject,
   
   
   
