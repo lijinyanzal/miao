@@ -1043,6 +1043,11 @@ function xor(...arrays){
   return filter(flatten(arrays),it => !intersection(...arrays).includes(it))
 }
 
+// function xorBy(...arrays, predicate = identity) {
+  
+  
+// }
+
 return { 
   chunk,
   compact,
