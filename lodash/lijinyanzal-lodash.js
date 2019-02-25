@@ -1142,6 +1142,9 @@ function flatMapDepth(collection, predicate = identity, depth = 1){
   return flattenDepth(collection.map(it => predicate(it)), depth)
 }
 
+// function forEach(collection,predicate = identity){
+  
+// }
 return { 
   chunk,
   compact,
@@ -1266,9 +1269,10 @@ return {
   every,
   find,
   findLast,
-  flattenMap,
+  flatMap,
   flatMapDeep,
   flatMapDepth,
+  
   
   
   
