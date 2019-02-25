@@ -1131,29 +1131,33 @@ function flatMapDepth(collection, predicate = identity, depth = 1){
 
 function forEach(collection, predicate = identity){
   if (isObject(collection)){
-    forIn(collection, predicate)
+    return forIn(collection, predicate)
   } else {
     predicate = iteratee(predicate)
+    var result = []
     for (var i = 0; i < collection.length; i++){
-      predicate(collection[i])
       if (predicate(collection[i]) == false){
         return 
       }
+      result.push(predicate(collection[i]))
     }
+    return result
   } 
 }
 
 function forEachRight(collection, predicate = identity){
   if (isObject(collection)){
-    forInRight(collection, predicate)
+    return forInRight(collection, predicate)
   } else {
     predicate = iteratee(predicate)
+    var result = []
     for (var i = collection.length - 1; i >= 0; i--){
-      predicate(collection[i])
       if (predicate(collection[i]) == false){
         return 
       }
+      result.push(predicate(collection[i]))
     }
+    return result
   }  
 }
 
@@ -1174,6 +1178,8 @@ function forInRight(object, predicate = identity){
   }
   return object
 }
+
+
 
 return { 
   chunk,
