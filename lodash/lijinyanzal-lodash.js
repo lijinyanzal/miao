@@ -1127,6 +1127,21 @@ function findLast(collection, predicate = identity, fromIndex = collection.lengt
   return undefined
 }
 
+function flatMap(collection, predicate = identity){
+  predicate = iteratee(predicate)
+  return flatten(collection.map(it => predicate(it)))
+}
+
+function flatMapDeep(collection, predicate = identity){
+  predicate = iteratee(predicate)
+  return flattenDeep(collection.map(it => predicate(it)))
+}
+
+function flatMapDepth(collection, predicate = identity, depth = 1){
+  predicate = iteratee(predicate)
+  return flattenDepth(collection.map(it => predicate(it)), depth)
+}
+
 return { 
   chunk,
   compact,
@@ -1251,6 +1266,12 @@ return {
   every,
   find,
   findLast,
+  flattenMap,
+  flatMapDeep,
+  flatMapDepth,
+  
+  
+  
   
   
   
