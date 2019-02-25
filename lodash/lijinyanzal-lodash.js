@@ -1039,6 +1039,9 @@ function without(array, ...values){
   return difference(array,[...values])
 }
 
+function xor(...arrays){
+  return filter(flatten(arrays),it => !intersection(...arrays).includes(it))
+}
 
 return { 
   chunk,
@@ -1156,6 +1159,7 @@ return {
   zip,
   unzip,
   without,
+  xor,
   
   
   
