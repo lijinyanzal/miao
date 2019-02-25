@@ -1094,6 +1094,17 @@ function countBy(collection, predicate = identity) {
   
 }
 
+function every(collection, predicate = identity){
+  predicate = iteratee(predicate)
+  collection = collection.map(it => predicate(it))
+  for (var i = 0; i < collection.length; i++){
+    if (!collection[i]) {
+      return false
+    }
+  }
+  return true
+}
+
 return { 
   chunk,
   compact,
@@ -1215,6 +1226,8 @@ return {
   xorBy,
   zipObject,
   countBy,
+  every,
+  
   
   
   
