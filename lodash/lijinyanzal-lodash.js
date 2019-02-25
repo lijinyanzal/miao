@@ -1035,6 +1035,11 @@ function unzip(array){
   return result
 }
 
+function without(array, ...values){
+  return difference(array,[...values])
+}
+
+
 return { 
   chunk,
   compact,
@@ -1150,6 +1155,7 @@ return {
   uniqBy,
   zip,
   unzip,
+  without,
   
   
   
