@@ -696,19 +696,6 @@ function findLastKey(object, predicate = identity) {
   return undefined
 }
 
-function forIn(object, predicate = identity){
-  func = iteratee(predicate)
-  let keys = Object.keys(object)
-  // let obj = Object.getPrototypeOf(object)
-  // for(let prop in obj) {
-  //   keys.push(prop)
-  //   object[prop] = obj[prop]
-  // }
-  for (let i = 0; i < keys.length; i++) {
-    func(object[keys[i]], keys[i], object )
-  }
-  return object
-}
 
 function differenceBy(array, ...args) {
   let predicate
@@ -1108,7 +1095,7 @@ function every(collection, predicate = identity){
 function find(collection, predicate = identity, fromIndex = 0){
   predicate = iteratee(predicate)
   var newCollection = collection.map(it => predicate(it))
-  for (var i = fromIndex; i < newCollection.length; i++){
+  for (var i = fromIndex; i < collection.length; i++){
     if (newCollection[i]) {
       return collection[i]
     }
@@ -1142,9 +1129,52 @@ function flatMapDepth(collection, predicate = identity, depth = 1){
   return flattenDepth(collection.map(it => predicate(it)), depth)
 }
 
-// function forEach(collection,predicate = identity){
-  
-// }
+function forEach(collection, predicate = identity){
+  if (isObject(collection)){
+    forIn(collection, predicate)
+  } else {
+    predicate = iteratee(predicate)
+    for (var i = 0; i < collection.length; i++){
+      predicate(collection[i])
+      if (predicate(collection[i]) == false){
+        return 
+      }
+    }
+  } 
+}
+
+function forEachRight(collection, predicate = identity){
+  if (isObject(collection)){
+    forInRight(collection, predicate)
+  } else {
+    predicate = iteratee(predicate)
+    for (var i = collection.length - 1; i >= 0; i--){
+      predicate(collection[i])
+      if (predicate(collection[i]) == false){
+        return 
+      }
+    }
+  }  
+}
+
+function forIn(object, predicate = identity){
+  func = iteratee(predicate)
+  let keys = Object.keys(object)
+  for (let i = 0; i < keys.length; i++) {
+    func(object[keys[i]], keys[i], object )
+  }
+  return object
+}
+
+function forInRight(object, predicate = identity){
+  func = iteratee(predicate)
+  let keys = Object.keys(object)
+  for (let i = keys.length - 1; i >= 0; i--) {
+    func(object[keys[i]], keys[i], object )
+  }
+  return object
+}
+
 return { 
   chunk,
   compact,
@@ -1272,6 +1302,12 @@ return {
   flatMap,
   flatMapDeep,
   flatMapDepth,
+  forEach,
+  forEachRight,
+  forInRight,
+  
+  
+  
   
   
   
