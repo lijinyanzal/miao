@@ -1322,7 +1322,7 @@ function reject(collection, predicate = identity){
   predicate = iteratee(predicate) 
   var result = []
   for (var key in collection){
-    if (predicate(collection[key]) == undefined || predicate(collection[key]) == null ){
+    if (!predicate(collection[key])){
       result.push(collection[key])
     }
   }
@@ -1354,6 +1354,24 @@ function sampleSize(collection, n = 1){
   }
   return ary 
 }
+
+function size(collection){
+  if (isObject(collection)){
+    return Object.values(collection).length
+  }
+  return collection.length
+}
+
+function some(collection, predicate = identity){
+  predicate = iteratee(predicate) 
+  for (var key in collection){
+    if (predicate(collection[key])){
+      return true
+    }
+  }
+  return false
+}
+
 
 
 return { 
@@ -1493,6 +1511,10 @@ return {
   reject,
   sample,
   sampleSize,
+  size,
+  some,
+  
+  
   
   
   
