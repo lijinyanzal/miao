@@ -1027,8 +1027,25 @@ function without(array, ...values){
 }
 
 function xor(...arrays){
-  return filter(flatten(arrays),it => !intersection(...arrays).includes(it))
+  var ary = flatten(arrays)
+  var map = {}
+  var result = []
+  for (let i = 0; i < ary.length; i++){
+    if (ary[i] in map){
+      map[ary[i]]++
+    } else {
+      map[ary[i]] = 1
+    }
+  }
+  var keys = Object.keys(map)
+  for (let i = 0; i < keys.length; i++){
+    if (map[keys[i]] == 1){
+      result.push(+keys[i])
+    }
+  }
+  return result
 }
+
 
 function filter(collection, predicate = identity){
   predicate = iteratee(predicate)
@@ -1043,20 +1060,7 @@ function filter(collection, predicate = identity){
   }, [])
 }
 
-function xorBy(arrays, predicate = identity) {
-  predicate = iteratee(predicate)
-  var ary = intersection(...arrays).map(it => predicate(it))
-  return filter(flatten(arrays),item => {
-    !ary.includes(predicate(item))
-  })
-  var array = flatten(arrays)
-  return array.reduce((res, item) => {
-    if (ary.includes(predicate(item))){
-      res.push(array[i])
-    }
-    return res
-  })
-}
+
 
  function zipObject(props = [], values = []){
    var obj = {}
@@ -1235,8 +1239,10 @@ function map(collection, predicate = identity){
   if (isArray(collection)){
     return collection.map(it => predicate(it))
   } else {
-    for (var key of  collection){
-      result.push(predicate(collection[key]))
+    for (var key in  collection){
+      if (collection.hasOwnProperty(key)){
+        result.push(predicate(collection[key]))
+      }
     }
     return result
   }
@@ -1248,11 +1254,14 @@ function partition(collection, predicate = identity){
   var result = [first, last]
   predicate = iteratee(predicate) 
   for (var key in collection){
-    if (predicate(collection[key])){
-      first.push(collection[key])
-    } else {
-      last.push(collection[key])
+    if (collection.hasOwnProperty(key)){
+      if (predicate(collection[key])){
+        first.push(collection[key])
+      } else {
+        last.push(collection[key])
+      }
     }
+    
   }
   return result
 }
@@ -1271,6 +1280,45 @@ function gt(value, other){
 function gte(value, other){
   return value >= other
 }
+
+function reduce(collection, predicate = identity, accu){
+  predicate = iteratee(predicate) 
+  for (var key in collection){
+    if (accu === undefined){
+      accu = collection[key]
+      continue
+    }
+    accu = predicate(accu, collection[key], key, collection )
+  }
+  return accu
+ 
+}
+
+function reduceRight(collection, predicate = identity, accu){
+  predicate = iteratee(predicate) 
+  if (isArray(collection)){
+    collection = collection.reverse()
+  }
+  if (isObject(collection)){
+    var obj = {}
+    var keys = Object.keys(collection)
+    var values = Object.values(collection)
+    for (var i = keys.length - 1; i >= 0; i-- ){
+      obj[keys[i]] = values[i]
+    }
+    collection = obj
+  }
+  for (var key in collection){
+    if (accu === undefined){
+      accu = collection[key]
+      continue
+    }
+    accu = predicate(accu, collection[key], key, collection )
+  }
+  return accu
+ 
+}
+
 
 
 return { 
@@ -1386,7 +1434,6 @@ return {
   without,
   xor,
   filter,
-  xorBy,
   zipObject,
   countBy,
   every,
@@ -1406,6 +1453,10 @@ return {
   eq,
   gt, 
   gte,
+  reduce,
+  reduceRight,
+  
+  
   
   
   
