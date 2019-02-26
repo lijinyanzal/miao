@@ -1081,6 +1081,20 @@ function countBy(collection, predicate = identity) {
   
 }
 
+function groupBy(collection , predicate = identity){
+  var map = {}
+  predicate = iteratee(predicate)
+  newCollection = collection.map(it => predicate(it))
+  for (var i = 0; i < collection.length; i++){
+    map[newCollection[i]] = collection[i]
+  }
+  return map
+}
+
+
+
+
+
 function every(collection, predicate = identity){
   predicate = iteratee(predicate)
   collection = collection.map(it => predicate(it))
@@ -1311,6 +1325,8 @@ return {
   forEach,
   forEachRight,
   forInRight,
+  groupBy,
+  
   
   
   
