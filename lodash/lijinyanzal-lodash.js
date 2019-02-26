@@ -1373,6 +1373,9 @@ function some(collection, predicate = identity){
 }
 
 function castArray(value){
+  if (arguments.length == 0){
+    return []
+  }
   if (isArray(value)){
     return value
   } 
