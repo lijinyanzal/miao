@@ -1268,7 +1268,7 @@ function gt(value, other){
   return value > other
 }
 
-function gt(value, other){
+function gte(value, other){
   return value >= other
 }
 
@@ -1406,19 +1406,6 @@ return {
   eq,
   gt, 
   gte,
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
