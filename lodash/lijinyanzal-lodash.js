@@ -1315,8 +1315,18 @@ function reduceRight(collection, predicate = identity, accu){
     }
     accu = predicate(accu, collection[key], key, collection )
   }
-  return accu
- 
+  return accu 
+}
+
+function reject(collection, predicate = identity){
+  predicate = iteratee(predicate) 
+  var result = []
+  for (var key in collection){
+    if (!predicate(collection[key])){
+      result.push(collection[key])
+    }
+  }
+  return result
 }
 
 
@@ -1455,6 +1465,7 @@ return {
   gte,
   reduce,
   reduceRight,
+  reject,
   
   
   
