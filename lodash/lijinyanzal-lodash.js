@@ -1322,7 +1322,7 @@ function reject(collection, predicate = identity){
   predicate = iteratee(predicate) 
   var result = []
   for (var key in collection){
-    if (!predicate(collection[key])){
+    if (predicate(collection[key]) == undefined || predicate(collection[key]) == null ){
       result.push(collection[key])
     }
   }
