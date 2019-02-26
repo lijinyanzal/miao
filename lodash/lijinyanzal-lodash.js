@@ -1218,6 +1218,23 @@ function includes(collection, value, fromIndex = 0) {
   }
 }
 
+function keyBy(collection, predicate = identity){
+  predicate = iteratee(predicate)
+  return collection.reduce((res, item) => {
+    var key = predicate(item)
+    res[key] = item
+    return result
+  }, {}) 
+}
+
+function map(collection, predicate = identity){
+  predicate = iteratee(predicate) 
+  if (isObject(collection)){
+    collection = Object.values(collection)
+  }
+  return collection.map(it => predicate(it))
+}
+
 return { 
   chunk,
   compact,
@@ -1345,6 +1362,10 @@ return {
   forInRight,
   groupBy,
   includes,
+  keyBy,
+  map,
+  
+  
   
   
   
