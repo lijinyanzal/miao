@@ -1208,7 +1208,15 @@ function forInRight(object, predicate = identity){
   return object
 }
 
-
+function includes(collection, value, fromIndex = 0) {
+  if (isArray(collection) || isString(collection)){
+    return collection.includes(value, fromIndex)
+  }
+  if (isObject(collection)){
+    var values = Object.values(collection)
+    return values.includes(value, fromIndex)
+  }
+}
 
 return { 
   chunk,
@@ -1336,6 +1344,8 @@ return {
   forEachRight,
   forInRight,
   groupBy,
+  includes,
+  
   
   
   
