@@ -1372,7 +1372,18 @@ function some(collection, predicate = identity){
   return false
 }
 
+function castArray(value){
+  if (isArray(value)){
+    return value
+  } 
+  return  [value]
+}
 
+function conformsTo(object, source){
+  var key = Object.keys(source)[0]
+  var predicate = source[key]
+  return predicate(object[key])
+}
 
 return { 
   chunk,
@@ -1513,6 +1524,10 @@ return {
   sampleSize,
   size,
   some,
+  castArray,
+  conformsTo,
+  
+  
   
   
   
