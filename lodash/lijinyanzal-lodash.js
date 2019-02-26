@@ -1220,19 +1220,37 @@ function includes(collection, value, fromIndex = 0) {
 
 function keyBy(collection, predicate = identity){
   predicate = iteratee(predicate)
-  return collection.reduce((res, item) => {
-    var key = predicate(item)
-    res[key] = item
-    return result
-  }, {}) 
+  var keyOfCollection
+  var obj = {}
+  for (var key in collection){
+    keyOfCollection = predicate(collection[key])
+    obj[keyOfCollection] = collection[key]
+  }
+  return obj
 }
 
 function map(collection, predicate = identity){
-  predicate = iteratee(predicate) 
-  if (isObject(collection)){
-    collection = Object.values(collection)
+  predicate = iteratee(predicate)
+  var result = []  
+  for (var key in collection){
+    result.push(predicate(collection[key]))
   }
-  return collection.map(it => predicate(it))
+  return result
+}
+
+function partition(collection, predicate = identity){
+  var first = []
+  var last = []
+  var result = [first, last]
+  predicate = iteratee(predicate) 
+  for (var key in collection){
+    if (predicate(collection[key])){
+      first.push(collection[key])
+    } else {
+      last.push(collection[key])
+    }
+  }
+  return result
 }
 
 return { 
@@ -1362,8 +1380,11 @@ return {
   forInRight,
   groupBy,
   includes,
-  keyBy,
   map,
+  keyBy,
+  partition,
+  
+  
   
   
   
