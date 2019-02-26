@@ -1232,10 +1232,14 @@ function keyBy(collection, predicate = identity){
 function map(collection, predicate = identity){
   predicate = iteratee(predicate)
   var result = []  
-  for (var key in collection){
-    result.push(predicate(collection[key]))
+  if (isArray(collection)){
+    return collection.map(it => predicate(it))
+  } else {
+    for (var key of  collection){
+      result.push(predicate(collection[key]))
+    }
+    return result
   }
-  return result
 }
 
 function partition(collection, predicate = identity){
@@ -1252,6 +1256,22 @@ function partition(collection, predicate = identity){
   }
   return result
 }
+
+function eq(value, other){
+  if (isNaN(value) && isNaN(other)){
+    return true
+  }
+  return value === other
+}
+
+function gt(value, other){
+  return value > other
+}
+
+function gt(value, other){
+  return value >= other
+}
+
 
 return { 
   chunk,
@@ -1383,6 +1403,11 @@ return {
   map,
   keyBy,
   partition,
+  eq,
+  gt, 
+  gte,
+  
+  
   
   
   
