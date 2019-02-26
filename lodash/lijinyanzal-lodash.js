@@ -1083,10 +1083,25 @@ function countBy(collection, predicate = identity) {
 
 function groupBy(collection , predicate = identity){
   var map = {}
+  var count = countBy(collection , predicate)
   predicate = iteratee(predicate)
   newCollection = collection.map(it => predicate(it))
+  
+  var values = []
   for (var i = 0; i < collection.length; i++){
-    map[newCollection[i]] = collection[i]
+    var val = []
+    if (count[newCollection[i]] == 1 ) {
+      val.push(collection[i])
+      map[newCollection[i]] = val
+      val = []
+    } else {
+      values.push(collection[i])
+      if (values.length == count[newCollection[i]]) {
+        map[newCollection[i]] = values
+        values = []
+      }
+      
+    }
   }
   return map
 }
@@ -1279,11 +1294,6 @@ return {
   minBy,
   multiply,
   subtract,
-
-  // round,
-  // ceil,
-  // floor,
-  
   clamp,
   inRange,
   findKey,
