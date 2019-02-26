@@ -1329,6 +1329,31 @@ function reject(collection, predicate = identity){
   return result
 }
 
+function sample(collection){
+  var min = 0
+  var max = collection.length - 1
+  var random =  Math.floor(Math.random() * (max - min + 1)) + min
+  return collection[random]
+}
+
+function sampleSize(collection, n = 1){
+  var min = 0
+  var max = collection.length - 1
+  var random
+  var ary = []
+  if (n > max + 1){
+    n = max + 1
+  }
+  var count = 0
+  while(count < n ){
+    random =  Math.floor(Math.random() * (max - min + 1)) + min
+    if (!ary.includes(collection[random])){
+      ary.push(collection[random])
+      count++
+    }
+  }
+  return ary 
+}
 
 
 return { 
@@ -1466,6 +1491,10 @@ return {
   reduce,
   reduceRight,
   reject,
+  sample,
+  sampleSize,
+  
+  
   
   
   
