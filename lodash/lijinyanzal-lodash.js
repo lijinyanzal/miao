@@ -1388,7 +1388,7 @@ function conformsTo(object, source){
   return predicate(object[key])
 }
 
-function forOwn(object,predicate = identity){
+function forOwn(object, predicate = identity){
   predicate = iteratee(predicate) 
   for (var key in object){
     if (object.hasOwnProperty(key)){
@@ -1432,13 +1432,15 @@ function functionsIn(object){
   return keys
 }
 
-function get(object, path, defaultValue){
-  
-  
+function invert(object){
+  var keys = Object.keys(object)
+  var values = Object.values(object)
+  var obj = {}
+  for (var i = 0; i < keys.length ; i++){
+    obj[values[i]] = keys[i]
+  }
+  return obj
 }
-
-
-
 
 
 return { 
@@ -1586,6 +1588,8 @@ return {
   forOwnRight,
   functions,
   functionsIn,
+  invert,
+  
   
   
   
