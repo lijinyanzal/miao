@@ -1406,7 +1406,12 @@ function forOwnRight(object,predicate = identity){
   for (var i = keys.length - 1; i >= 0; i--){
     obj[keys[i]] = values[i]
   }
-  return forOwn(obj, predicate)
+  for (var key in obj){
+    if (obj.hasOwnProperty(key)){
+      predicate(obj[key], key)
+    }
+  }
+  return obj 
 }
 
 function functions(object){
@@ -1427,7 +1432,10 @@ function functionsIn(object){
   return keys
 }
 
-
+function get(object, path, defaultValue){
+  
+  
+}
 
 
 
@@ -1574,8 +1582,8 @@ return {
   some,
   castArray,
   conformsTo,
-  forOwnRight,
   forOwn,
+  forOwnRight,
   functions,
   functionsIn,
   
