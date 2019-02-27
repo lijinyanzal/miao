@@ -1388,6 +1388,27 @@ function conformsTo(object, source){
   return predicate(object[key])
 }
 
+function forOwn(object,predicate = identity){
+  predicate = iteratee(predicate) 
+  for (var key in object){
+    if (object.hasOwnProperty(key)){
+      predicate(object[key], key)
+    }
+  }
+  return object
+}
+
+function forOwnRight(object,predicate = identity){
+  predicate = iteratee(predicate) 
+  var keys = Object.keys(object)
+  var values = Object.values(object)
+  var obj = {}
+  for (var i = keys.length - 1; i >= 0; i--){
+    obj[keys[i]] = values[i]
+  }
+  return forOwn(obj, predicate)
+}
+
 return { 
   chunk,
   compact,
@@ -1529,6 +1550,9 @@ return {
   some,
   castArray,
   conformsTo,
+  forOwnRight,
+  forOwn,
+  
   
   
   
