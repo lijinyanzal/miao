@@ -1409,6 +1409,30 @@ function forOwnRight(object,predicate = identity){
   return forOwn(obj, predicate)
 }
 
+function functions(object){
+  var keys = []
+  for (var prop in object){
+    if (object.propertyIsEnumerable(prop)){
+      keys.push(prop)
+    }
+  }
+  return keys 
+}
+
+function functionsIn(object){
+  var keys = []
+  for(var prop in object){
+    keys.push(prop)
+  }
+  return keys
+}
+
+
+
+
+
+
+
 return { 
   chunk,
   compact,
@@ -1552,6 +1576,9 @@ return {
   conformsTo,
   forOwnRight,
   forOwn,
+  functions,
+  functionsIn,
+  
   
   
   
