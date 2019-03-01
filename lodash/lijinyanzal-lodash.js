@@ -1450,6 +1450,20 @@ function keysIn(object){
   return Object.keys(forIn(obj))
 }
 
+function mapKeys(object, predicate = identity){
+  predicate = iteratee(predicate) 
+  var obj = {}
+  for (var key in object){
+    if (object.hasOwnProperty(key)){
+      var value = object[key]
+      key = predicate(key)
+      obj[key] = value
+    }
+  }
+  return obj
+}
+
+
 
 return { 
   chunk,
@@ -1599,6 +1613,8 @@ return {
   invert,
   keys,
   keysIn,
+  mapKeys,
+  
   
   
   
