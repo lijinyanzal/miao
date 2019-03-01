@@ -1446,7 +1446,7 @@ function keys(obj){
   return Object.keys(forOwn(obj))
 }
 
-function keysIn(object){
+function keysIn(obj){
   return Object.keys(forIn(obj))
 }
 
