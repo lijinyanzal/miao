@@ -1200,7 +1200,7 @@ function forIn(object, predicate = identity){
   for (let i = 0; i < keys.length; i++) {
     func(object[keys[i]], keys[i], object )
   }
-  return object
+  return object 
 }
 
 function forInRight(object, predicate = identity){
@@ -1447,7 +1447,6 @@ function keys(obj){
 }
 
 function keysIn(obj){
-  var obj = forIn(obj)
   return Object.keys(obj)
 }
 
