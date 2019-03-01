@@ -1534,6 +1534,22 @@ function toPairsIn(object){
   return result 
 }
 
+function transform(object, predicate = identity, accu){
+  predicate = iteratee(predicate)
+  for (var key in object){
+    if (object.hasOwnProperty(key) ){
+      if (predicate(accu, object[key], key, object) === false){
+        return accu
+      }
+    }
+  }
+  return accu
+}
+
+
+
+
+
 
 return { 
   chunk,
@@ -1690,6 +1706,8 @@ return {
   pick,
   pickBy,
   toPairsIn,
+  transform,
+  
   
   
   
