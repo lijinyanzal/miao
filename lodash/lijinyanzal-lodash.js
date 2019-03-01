@@ -1467,6 +1467,40 @@ function mapKeys(object, predicate = identity){
   return obj
 }
 
+function mapValues(object, predicate = identity){
+  predicate = iteratee(predicate)
+  var obj = {}
+  var value
+  for (var key in object){
+    if (object.hasOwnProperty(key)){
+      value = object[key]
+      var val = predicate(value, key, object)
+      obj[key] = val
+    }
+  }
+  return obj
+}
+
+function omit(object, paths){
+  var obj = {}
+  for(var key in object){
+    if (!paths.includes(key)){
+      obj[key] = object[key]
+    }
+  }
+  return obj
+}
+
+function omitBy(object, predicate = identity){
+  predicate = iteratee(predicate)
+  var obj = {}
+  for (var key in object){
+    if (!predicate(object[key], key)){
+      obj[key] = object[key]
+    }
+  }
+  return obj
+}
 
 
 return { 
@@ -1618,6 +1652,12 @@ return {
   keys,
   keysIn,
   mapKeys,
+  mapValues,
+  omit,
+  omitBy,
+  
+  
+  
   
   
   
