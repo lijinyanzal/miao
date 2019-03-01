@@ -1546,9 +1546,18 @@ function transform(object, predicate = identity, accu){
   return accu
 }
 
+function values(object){
+  object = forOwn(object)
+  return Object.values(object)
+}
 
-
-
+function valuesIn(object){
+  var values = []
+  for (var key in object){
+    values.push(object[key])
+  }
+  return values
+}
 
 
 return { 
@@ -1707,6 +1716,10 @@ return {
   pickBy,
   toPairsIn,
   transform,
+  values,
+  valuesIn,
+  
+  
   
   
   
