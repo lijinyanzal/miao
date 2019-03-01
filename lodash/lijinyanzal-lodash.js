@@ -1502,6 +1502,27 @@ function omitBy(object, predicate = identity){
   return obj
 }
 
+function pick(object, paths){
+  var obj = {}
+  for(var key in object){
+    if (paths.includes(key)){
+      obj[key] = object[key]
+    }
+  }
+  return obj 
+}
+
+function pickBy(object, predicate = identity){
+  predicate = iteratee(predicate)
+  var obj = {}
+  for (var key in object){
+    if (predicate(object[key], key)){
+      obj[key] = object[key]
+    }
+  }
+  return obj
+}
+
 
 return { 
   chunk,
@@ -1655,6 +1676,9 @@ return {
   mapValues,
   omit,
   omitBy,
+  pick,
+  pickBy,
+  
   
   
   
