@@ -1442,6 +1442,14 @@ function invert(object){
   return obj
 }
 
+function keys(obj){
+  return Object.keys(forOwn(obj))
+}
+
+function keysIn(object){
+  return Object.keys(forIn(obj))
+}
+
 
 return { 
   chunk,
@@ -1589,6 +1597,9 @@ return {
   functions,
   functionsIn,
   invert,
+  keys,
+  keysIn,
+  
   
   
   
