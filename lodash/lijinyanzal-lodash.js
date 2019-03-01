@@ -1559,6 +1559,19 @@ function valuesIn(object){
   return values
 }
 
+function camelCase(string = ''){
+  var str = string.replace(/[\-*\_*]/g, " ")
+  .toLowerCase()
+  .replace(/\b(\w)/g, function(str){
+    return str.toUpperCase()
+  }).replace(/\s/g, "")
+  str = str[0].toLowerCase() + str.slice(1)
+  return str
+}
+
+
+
+
 
 return { 
   chunk,
@@ -1718,6 +1731,8 @@ return {
   transform,
   values,
   valuesIn,
+  camelCase,
+  
   
   
   
