@@ -1447,7 +1447,8 @@ function keys(obj){
 }
 
 function keysIn(obj){
-  return Object.keys(forIn(obj))
+  var obj = forIn(obj)
+  return Object.keys(obj)
 }
 
 function mapKeys(object, predicate = identity){
@@ -1456,7 +1457,7 @@ function mapKeys(object, predicate = identity){
   for (var key in object){
     if (object.hasOwnProperty(key)){
       var value = object[key]
-      key = predicate(key)
+      key = predicate(value, key)
       obj[key] = value
     }
   }
