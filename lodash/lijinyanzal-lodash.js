@@ -1523,6 +1523,17 @@ function pickBy(object, predicate = identity){
   return obj
 }
 
+function toPairsIn(object){
+  var result = []
+  var item = []
+  for (var key in object){
+    item.push(key, object[key])
+    result.push(item)
+    item = []
+  }
+  return result 
+}
+
 
 return { 
   chunk,
@@ -1678,6 +1689,8 @@ return {
   omitBy,
   pick,
   pickBy,
+  toPairsIn,
+  
   
   
   
