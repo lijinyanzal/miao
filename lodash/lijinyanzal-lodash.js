@@ -1771,6 +1771,14 @@ function unescape(string = ''){
   
 }
 
+function defaultTo(value, defaultValue){
+  if (value === NaN || value === undefined || value === null || value !== value){
+    return defaultValue
+  }
+  return value
+  
+}
+
 
 return { 
   chunk,
@@ -1957,6 +1965,7 @@ return {
   upperFirst,
   words,
   unescape,
+  defaultTo,
   
   
   
