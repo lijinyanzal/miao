@@ -1602,6 +1602,49 @@ function lowerCase(string = ""){
                .toLowerCase()
 }
 
+function lowerFirst(string = ""){
+  return string.replace(/^(\w)/, str=> str.toLowerCase())
+}
+
+function pad(string = '', length = 0, chars = ' '){
+  let result = ""
+  let len = string.length
+  let diff = length - len
+  if (diff <= 0){
+    return string
+  }
+  let front = Math.floor(diff / 2)
+  let last = diff - front
+  for (let i = 0; i < front; i += chars.length){
+    result += chars
+  }
+  result += string
+  for (let i = 0; i < last; i += chars.length){
+    result += chars
+  }
+  if (last % chars.length != 0){
+    result = result.slice(0, result.length - 1)
+  }
+  return result
+}
+
+function padEnd(string = '', length = 0, chars = ' '){
+  let result = string
+  let len = string.length
+  let diff = length - len
+  if (diff <= 0){
+    return result
+  }
+  
+  for (let i = 0; i < diff; i += chars.length){
+    result += chars
+  }
+  if (diff % chars.length != 0){
+    result = result.slice(0, result.length - 1)
+  }
+  return result
+}
+
 return { 
   chunk,
   compact,
@@ -1767,6 +1810,12 @@ return {
   escapeRegExp,
   kebabCase,
   lowerCase,
+  lowerFirst,
+  pad,
+  padEnd,
+  
+  
+  
   
   
   
