@@ -1577,19 +1577,6 @@ function endsWith(string = '', target, position = string.length){
   return string[position - 1] == target
 }
 
-function escape(string = ""){
-  return string.replace(/\&/g, '&amp;')
-               .replace(/\>/g, '&gt;')
-               .replace(/\</g, '&lt;')
-               .replace(/\"/g, '&quot;')
-               .replace(/\'/g, '&apos;')
-  
-}
-
-function escapeRegExp(string = ""){
-  return string.replace(/([\[\]\$\^\.\*\+\?\(\)\{\}\|\ ])/g, str => '\\' + str)
-}
-
 function kebabCase(string = ""){
   return string.replace(/(\s)|(?<=[A-Z])(\_)(?=[A-Z])|(?<=[a-z])(?=[A-Z])/g, "-").replace(/^\_*|\_*$/g, "").toLowerCase()
             
@@ -1757,7 +1744,32 @@ function upperCase(string = ''){
                .toUpperCase()
 }
 
+function upperFirst(string = ""){
+  return string[0].toUpperCase() + string.slice(1)
+}
 
+function words(string = "", pattern = /\b(\w+)\b/g){
+  return string.match(pattern)
+}
+
+function escape(string = ""){
+  return string.replace(/\&/g, '&amp;')
+               .replace(/\>/g, '&gt;')
+               .replace(/\</g, '&lt;')
+               .replace(/\"/g, '&quot;')
+               .replace(/\'/g, '&apos;')
+  
+}
+
+function unescape(string = ''){
+  return string.replace(/\&amp\;/g, '&')
+               .replace(/\&gt\;/g, '>')
+               .replace(/\&lt\;/g, '<')
+               .replace(/\&quot\;/g, '"')
+               .replace(/\&apos\;/g, "'")
+  
+  
+}
 
 
 return { 
@@ -1942,6 +1954,12 @@ return {
   trimEnd,
   trimStart,
   upperCase,
+  upperFirst,
+  words,
+  unescape,
+  
+  
+  
   
   
   
