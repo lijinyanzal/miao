@@ -1710,10 +1710,19 @@ function startCase(string = ''){
                   .replace(/^\_*|\_*$/g, "")
                   .replace(/(?<=[a-z])(\-)(?=[a-z])|(?<=[A-Z])(\_)(?=[A-Z])|(?<=[a-z])(?=[A-Z])/g, ' '
                ).replace(/\b\w/g, str => str.toUpperCase())
-  
-  
 }
 
+function startsWith(string = '', target, position = 0){
+  return string[position] == target
+}
+
+function toLower(string = ''){
+  return string.toLowerCase()
+}
+
+function toUpper(string = ''){
+  return string.toUpperCase()
+}
 
 return { 
   chunk,
@@ -1890,6 +1899,11 @@ return {
   snakeCase,
   split,
   startCase,
+  startsWith,
+  toLower,
+  toUpper,
+  
+  
   
   
   
