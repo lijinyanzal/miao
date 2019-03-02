@@ -1569,9 +1569,26 @@ function camelCase(string = ''){
   return str
 }
 
+function capitalize( string = ''){
+  return string[0].toUpperCase() + string.slice(1).toLowerCase()
+}
 
+function endsWith(string = '', target, position = string.length){
+  return string[position - 1] == target
+}
 
+function escape(string = ""){
+  return string.replace(/\&/g, '&amp;')
+               .replace(/\>/g, '&gt;')
+               .replace(/\</g, '&lt;')
+               .replace(/\"/g, '&quot;')
+               .replace(/\'/g, '&apos;')
+  
+}
 
+function escapeRegExp(string = ""){
+  return string.replace(/([\[\]\$\^\.\*\+\?\(\)\{\}\|\ ])/g, str => '\\' + str)
+}
 
 return { 
   chunk,
@@ -1732,6 +1749,14 @@ return {
   values,
   valuesIn,
   camelCase,
+  capitalize,
+  endsWith,
+  escape,
+  escapeRegExp,
+  
+  
+  
+  
   
   
   
