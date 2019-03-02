@@ -1750,7 +1750,12 @@ function trimStart(string = '', chars = ' '){
   }
 }
 
-
+function upperCase(string = ''){
+  return string.replace(/^\-*|\-*$/g, "")
+               .replace(/^\_*|\_*$/g, "")
+               .replace(/(?<=[a-z])(\-)(?=[a-z])|(?<=[a-z])(?=[A-Z])|(?<=[a-z])(\_)(?=[a-z])/g, " ")
+               .toUpperCase()
+}
 
 
 
@@ -1936,6 +1941,8 @@ return {
   trim,
   trimEnd,
   trimStart,
+  upperCase,
+  
   
   
   
