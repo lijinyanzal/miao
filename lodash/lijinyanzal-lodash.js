@@ -1590,6 +1590,18 @@ function escapeRegExp(string = ""){
   return string.replace(/([\[\]\$\^\.\*\+\?\(\)\{\}\|\ ])/g, str => '\\' + str)
 }
 
+function kebabCase(string = ""){
+  return string.replace(/(\s)|(?<=[A-Z])(\_)(?=[A-Z])|(?<=[a-z])(?=[A-Z])/g, "-").replace(/^\_*|\_*$/g, "").toLowerCase()
+            
+}
+
+function lowerCase(string = ""){
+  return string.replace(/^(\_*)|(\_*)$/g, "")
+               .replace(/^(\-*)|(\-*)$/g, "")
+               .replace(/(?<=\w)(\_|\-)(?=\w)|(?<=[a-z])(?=[A-Z])/g, " ")
+               .toLowerCase()
+}
+
 return { 
   chunk,
   compact,
@@ -1753,6 +1765,10 @@ return {
   endsWith,
   escape,
   escapeRegExp,
+  kebabCase,
+  lowerCase,
+  
+  
   
   
   
