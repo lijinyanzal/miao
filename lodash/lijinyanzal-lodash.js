@@ -1737,7 +1737,7 @@ function trim(string = '', chars = " "){
 function trimEnd(string = '', chars = ' '){
   for (let i = string.length - 1; i >= 0; i--){
     if (chars !== string[i] && !chars.includes(string[i])){
-      return string.slice(0, i - 1)
+      return string.slice(0,i + 1)
     }
   }
 }
@@ -1749,6 +1749,8 @@ function trimStart(string = '', chars = ' '){
     }
   }
 }
+
+
 
 
 
