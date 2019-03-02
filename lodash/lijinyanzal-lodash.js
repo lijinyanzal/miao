@@ -1705,6 +1705,15 @@ function split(string = '', separator, limit){
   
 }
 
+function startCase(string = ''){
+  return string.replace(/^\-*|\-*$/g, "")
+                  .replace(/^\_*|\_*$/g, "")
+                  .replace(/(?<=[a-z])(\-)(?=[a-z])|(?<=[A-Z])(\_)(?=[A-Z])|(?<=[a-z])(?=[A-Z])/g, ' '
+               ).replace(/\b\w/g, str => str.toUpperCase())
+  
+  
+}
+
 
 return { 
   chunk,
@@ -1877,9 +1886,11 @@ return {
   padStart,
   parseInt,
   repeat,
-  replae,
+  replace,
   snakeCase,
   split,
+  startCase,
+  
   
   
   
