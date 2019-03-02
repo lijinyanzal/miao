@@ -1668,6 +1668,44 @@ function parseInt(string, radix = 10){
   
 }
 
+function repeat(string = "", n = 1){
+  var result = ''
+  for (let i = 0; i < n; i++){
+    result += string
+  }
+  return result
+  
+}
+
+function replace(string = "", pattern, replacement){
+  return string.replace(pattern, replacement)
+  
+}
+
+function snakeCase(string = ""){
+  return string.replace(/\s|(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(\-)(?=[A-Z])/g, "\_")
+               .replace(/^\-*|\-*$/g, "")
+               .toLowerCase()
+  
+}
+
+function split(string = '', separator, limit){
+  let ary = []
+  let item = ''
+  for (let i = 0; i < string.length; i++){
+    if (string[i] != separator){
+     item += string[i] 
+    } else {
+      ary.push(item)
+      item = ''
+    }
+  }
+  ary.push(item)
+  return ary.slice(0, limit)
+  
+}
+
+
 return { 
   chunk,
   compact,
@@ -1838,6 +1876,14 @@ return {
   padEnd,
   padStart,
   parseInt,
+  repeat,
+  replae,
+  snakeCase,
+  split,
+  
+  
+  
+  
   
   
   
