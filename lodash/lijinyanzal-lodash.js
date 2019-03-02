@@ -1645,6 +1645,29 @@ function padEnd(string = '', length = 0, chars = ' '){
   return result
 }
 
+function padStart (string = '', length = 0, chars = ' '){
+  let result = ''
+  let len = string.length
+  let diff = length - len
+  if (diff <= 0){
+    return string
+  }
+  
+  for (let i = 0; i < diff; i += chars.length){
+    result += chars
+  }
+  if (diff % chars.length != 0){
+    result = result.slice(0, result.length - 1)
+  }
+  result += string
+  return result
+}
+
+function parseInt(string, radix = 10){
+  return Number(string) | 0
+  
+}
+
 return { 
   chunk,
   compact,
@@ -1813,6 +1836,9 @@ return {
   lowerFirst,
   pad,
   padEnd,
+  padStart,
+  parseInt,
+  
   
   
   
