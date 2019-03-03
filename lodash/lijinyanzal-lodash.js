@@ -1906,6 +1906,23 @@ function unary(func){
   return ary(func, 1)
 }
 
+function negate(func){
+  return function (...args){
+    return !func(...args)
+  }
+}
+
+function once(func){
+  return function (...args){
+    return func(...args)
+  }
+}
+
+function spread(func, start = 0){
+  return function ([...args]){
+    return func(this,[...args])
+  }
+}
 
 
 return { 
@@ -2103,6 +2120,12 @@ return {
   pullAt,
   ary,
   unary,
+  negate,
+  once,
+  spread,
+  
+  
+  
   
   
   
