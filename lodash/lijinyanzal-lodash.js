@@ -1761,6 +1761,11 @@ function escape(string = ""){
   
 }
 
+function escapeRegExp(string = ""){
+  return string.replace(/[\^\$\.\*\+\?\(\)\[\]\{\}\|\ ]/g, str => "\\" + str)
+  
+}
+
 function unescape(string = ''){
   return string.replace(/\&amp\;/g, '&')
                .replace(/\&gt\;/g, '>')
@@ -1860,6 +1865,8 @@ function uniqueId(prefix = ''){
   result += String(time).slice(-3)
   return result
 }
+
+
 
 return { 
   chunk,
