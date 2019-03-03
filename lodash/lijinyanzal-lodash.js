@@ -1913,8 +1913,8 @@ function negate(func){
 }
 
 function once(func){
-  return function (...args){
-    return func(args.slice(0))
+  return function (arguments){
+    return func(arguments[0])
   }
 }
 
