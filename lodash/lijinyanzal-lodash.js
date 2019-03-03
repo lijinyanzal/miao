@@ -1854,6 +1854,13 @@ function toPath(value){
   return value.replace(/[^\w*]/g, "").split("")
 }
 
+function uniqueId(prefix = ''){
+  var time = Date.now()
+  var result = prefix
+  result += String(time).slice(-3)
+  return result
+}
+
 return { 
   chunk,
   compact,
@@ -2044,6 +2051,8 @@ return {
   rangeRight,
   times,
   toPath,
+  uniqueId,
+  
   
   
   
