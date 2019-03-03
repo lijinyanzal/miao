@@ -1896,6 +1896,16 @@ function pullAt(array, indexes){
   return pulled 
 }
 
+function ary (func, n = func.length){
+  return function (...args){
+    return func(args.slice(0, n))
+  }
+}
+
+function unary(func){
+  return ary(func, 1)
+}
+
 
 
 return { 
@@ -2091,6 +2101,8 @@ return {
   uniqueId,
   concat,
   pullAt,
+  ary,
+  unary,
   
   
   
