@@ -1841,6 +1841,19 @@ function rangeRight(start = 0, end, step = 1){
   return result.reverse()
 }
 
+function times(n , predicate = identity){
+  predicate = iteratee(predicate)
+  var result = []
+  for (var i = 0; i < n; i++){
+    result.push(predicate(i))
+  }
+  return result
+}
+
+function toPath(value){
+  return value.replace(/[^\w*]/g, "").split("")
+}
+
 return { 
   chunk,
   compact,
@@ -2029,6 +2042,10 @@ return {
   defaultTo,
   range,
   rangeRight,
+  times,
+  toPath,
+  
+  
   
   
   
