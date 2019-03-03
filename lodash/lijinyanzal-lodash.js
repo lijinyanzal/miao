@@ -1811,8 +1811,34 @@ function range(start = 0, end, step = 1){
 
 
 function rangeRight(start = 0, end, step = 1){
-  
-  return range(start, end, step).reverse()
+  var result = []
+  if (step == 0){
+    let count = start
+    while(count < end){
+      result.push(start)
+      count++
+    }
+    return result.reverse()
+  }
+  if (arguments.length == 1){
+    start = 0
+    end = arguments[0]
+    step = 1  
+  }
+  if (end < 0){
+    if (arguments.length == 1){
+      step = -1 
+    }
+    for (var i = start; i > end; i += step){
+      result.push(i)
+    }
+    return result.reverse()
+  }
+
+  for (var i  = start; i < end; i += step){
+    result.push(i)
+  }
+  return result.reverse()
 }
 
 return { 
