@@ -1776,9 +1776,44 @@ function defaultTo(value, defaultValue){
     return defaultValue
   }
   return value
-  
 }
 
+function range(start = 0, end, step = 1){
+  var result = []
+  if (step == 0){
+    let count = start
+    while(count < end){
+      result.push(start)
+      count++
+    }
+    return result
+  }
+  if (arguments.length == 1){
+    start = 0
+    end = arguments[0]
+    step = 1  
+  }
+  if (end < 0){
+    if (arguments.length == 1){
+      step = -1 
+    }
+    for (var i = start; i > end; i += step){
+      result.push(i)
+    }
+    return result
+  }
+
+  for (var i  = start; i < end; i += step){
+    result.push(i)
+  }
+  return result
+}
+
+
+function rangeRight(start = 0, end, step = 1){
+  
+  return range(start, end, step).reverse()
+}
 
 return { 
   chunk,
@@ -1966,6 +2001,10 @@ return {
   words,
   unescape,
   defaultTo,
+  range,
+  rangeRight,
+  
+  
   
   
   
