@@ -1862,8 +1862,38 @@ function toPath(value){
 function uniqueId(prefix = ''){
   var time = Date.now()
   var result = prefix
-  result += String(time).slice(-3)
+  result += String(time).slice(-1)
   return result
+}
+
+function concat(array, ...values) {
+  var other = []
+  for (let i = 0; i < array.length; i++){
+    other.push(array[i])
+  }
+  if (values === undefined){
+    return other
+  }
+  for (let i = 0; i < values.length; i++){
+    if (isArray(values[i])){
+      other.push(...values[i])
+    } else {
+      other.push(values[i])
+    }
+  }
+  return other
+}
+
+function pullAt(array, indexes){
+  var pulled = []
+  if (indexes == undefined){
+    return array
+  }
+  for (let i = 0; i < indexes.length; i++){
+    pulled.push(array[indexes[i]])
+  }
+  array = pullAll(array, pulled)
+  return pulled 
 }
 
 
@@ -2059,6 +2089,10 @@ return {
   times,
   toPath,
   uniqueId,
+  concat,
+  pullAt,
+  
+  
   
   
   
